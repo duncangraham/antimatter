@@ -1,1 +1,15 @@
-/* CSS declarations go here */
+body {
+	background-color:#14081B;
+}
+
+.center {
+	margin: 0px auto;
+	display: block;
+}
+
+.logo {
+	width: 50%;
+	margin-top:17.5%;
+}
+
+
