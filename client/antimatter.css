@@ -1,0 +1,49 @@
+body {
+	background-color: #14081B;
+	color: #FFF;
+	font-size: 1.5em;
+}
+
+.center {
+	margin: 0px auto;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.italic {
+	font-style: italic;
+}
+
+.tag {
+	margin: 1em;
+	font-size:1.2em;
+}
+
+.logo {
+	width: 50%;
+	margin-top:8em;
+}
+
+.large {
+	width:100%;
+}
+
+#SvgjsSvg1000{
+	width: 10%;
+	height: 100px;
+	position: absolute;
+	top:7em;
+	left:75%;
+}
+
+.w100 {
+	width:100%;
+}
+
+.bottom {
+	position: absolute;
+	bottom: 1em;
+}
+
