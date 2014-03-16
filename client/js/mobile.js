@@ -14,7 +14,21 @@ $(function(){
 
 
   function handleTilting(eventData){
+    if (eventData.beta >= 0){
+      voteUp(); // submit a vote of "up"
+    } 
+    else {
+      voteDown();// submit a vote of "down"
+    }
     $(".orientation").html(eventData.beta);
+  }
+
+  function voteUp(){
+    //increment the vote counter
+  }
+
+  function voteDown(){
+    //decrement the vote counter
   }
 
   // Template events
