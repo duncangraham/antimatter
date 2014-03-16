@@ -8,6 +8,11 @@ body {
 	margin: 0px auto;
 }
 
+.center-janky {
+	left: 50%;
+	margin-left: -42.5px;
+}
+
 .text-center {
 	text-align: center;
 }
@@ -45,5 +50,40 @@ body {
 .bottom {
 	position: absolute;
 	bottom: 1em;
+}
+
+.btn {
+	width: 3em;
+	padding: .25em .5em;
+	cursor: pointer;
+}
+
+.btn:after {
+	content: '';
+	position: absolute;
+	z-index: -1;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.btn-dark {
+	border: 1px solid #FFF;
+}
+
+.btn-dark:hover {
+	color:#14081B;
+}
+
+.btn-dark:hover:after, .btn-dark:active:after {
+width: 100%;
+}
+
+.btn-dark:after {
+width: 0%;
+height: 100%;
+top: 0;
+left: 0;
+background: #FFF;
 }
 
