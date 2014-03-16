@@ -37,3 +37,31 @@
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
+
+
+//Indicators frame
+body {
+  height: 100%;
+  width: 100%;
+}
+
+.indicators {
+  display: none;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.indicators .up-indicator {
+  line-height: 11em;
+  height:50%
+}
+
+.indicators .down-indicator {
+  line-height: 11em;
+  height:50%
+}
+
+.indicators .vert-text-center {
+  vertical-align: middle;
+}
