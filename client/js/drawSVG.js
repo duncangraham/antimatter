@@ -1,9 +1,16 @@
 Template.landing.rendered = function() {
-	drawAntihydrogen();
+	drawAntihydrogen('hydrogen', '100px', '100px');
 }
 
-var drawAntihydrogen = function () {
-	var draw = SVG('hydrogen').size('100px', '100px');
+Template.whatismatter.rendered = function() {
+	drawAntihydrogen('antihydrogen', '100px', '100px');
+}
+
+
+
+
+var drawAntihydrogen = function (id, x, y) {
+	var draw = SVG(id).size(x, y);
 
 	var antiproton = draw.rect( 15, 15 )
 			   	   		 			 .radius( 7.5 )
