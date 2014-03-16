@@ -4,15 +4,15 @@ $(function(){
 	var draw = SVG('hydrogen');
 
 	var antiproton = draw.rect( 15, 15 )
-			   	   		 .radius( 7.5 )
-			       		 .fill('#FFF')
-			       		 .move( 14.5, 14.5 )
+			   	   		 			 .radius( 7.5 )
+			       		 			 .fill('#FFF')
+			       		 			 .move( 14.5, 14.5 )
 
 	var outline = draw.rect( 40, 40 )
-					  .radius( 20 )
-					  .fill('rgba(0,0,0,0)')
-					  .stroke('#FFF')
-					  .move( 2.5, 2.5 )
+					  				.radius( 20 )
+					  				.fill('rgba(0,0,0,0)')
+					  				.stroke('#FFF')
+					  				.move( 2.5, 2.5 )
 
 
 	var positronX = 1,
