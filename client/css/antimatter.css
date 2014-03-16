@@ -1,13 +1,20 @@
+html, body {
+	height: 100%;
+}
+
 body {
 	background-color: #14081B;
 	color: #FFF;
 	font-size: 1.5em;
+	width: 100%;
 }
+
 
 a {
 	color:#FFF;
 	text-decoration: none;
 }
+
 
 .center {
 	margin: 0px auto;
@@ -25,14 +32,19 @@ a {
 	border: 1px solid #FFF;
 	border-radius: 2em;
 	opacity: .2;
+	background-color: #14081B;
+	z-index: 100;
+	transition: all .3s;
 }
 
 .nav.active {
 	opacity: 1;
 }
 
-.nav:hover {
-
+.nav.active:hover {
+	background-color: #FFF;
+	color: #14081B;
+	border: 1px solid #14081B;
 }
 
 .nav-forward {
@@ -42,7 +54,6 @@ a {
 .nav-back {
 	left:1em;
 }
-
 
 .italic {
 	font-style: italic;
@@ -55,18 +66,16 @@ a {
 
 .logo {
 	width: 50%;
-	margin-top:8em;
+	padding-top:10em;
 }
 
 .large {
 	width:100%;
 }
 
-#SvgjsSvg1000{
-	width: 10%;
-	height: 100px;
+#hydrogen {
 	position: absolute;
-	top:7em;
+	top:9em;
 	left:75%;
 }
 
@@ -79,7 +88,14 @@ a {
 	bottom: 1em;
 }
 
-.btn {
+#matter {
+	position: absolute;
+	width:100%;
+	height:100%;
+	background-color: #FFF;
+}
+
+/*.btn {
 	width: 3em;
 	padding: .25em .5em;
 	cursor: pointer;
@@ -112,5 +128,5 @@ height: 100%;
 top: 0;
 left: 0;
 background: #FFF;
-}
+}*/
 
