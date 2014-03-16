@@ -20,7 +20,8 @@ $(function(){
   // Template events
   Template.mobile.events = {
     'click .instructions': function() {
-      alert("You clicked it now, mofuckah!");
+      $(".instructions").hide();
+      $(".indicators").show();
     }
   }
 });
