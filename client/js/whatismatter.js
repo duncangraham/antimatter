@@ -14,9 +14,13 @@ Template.whatismatter.events = function() {
 }
 
 
-Template.whatismatter.rendered = function ( ) { 
+Template.whatismatter.rendered = function ( ) {
+	var antiHydrogen = new Atom('antihydrogen', 'light');
+	var hydrogen = new Atom('hydrogenAtom', 'dark');
+
 	var cursor = document.getElementById("matter"),
 			matter = document.getElementById("matterinfo"),
+			atom = document.getElementById("hydrogenAtom"),
 			width = $(window).width(),
 			percent;
 			
@@ -25,10 +29,11 @@ Template.whatismatter.rendered = function ( ) {
 			cursor.style.right = e.pageX*1 + "px";
 
 			percent = (e.pageX/width*200);
-
-			console.log(percent)
+			percentAtom = (e.pageX/width*100)-48.05;
 
 			matter.style.webkitTransform = 'translate(' + percent + '%,' + 0 + 'px)'; 
+			atom.style.right = -percentAtom + '%'; 
 
 	});	
 }
+

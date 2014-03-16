@@ -18,6 +18,10 @@ a {
 
 /* Widths and margins */
 
+.p1 {
+	padding:1em;
+}
+
 .w100 {
 	width: 100%;
 	float:left;
@@ -47,6 +51,10 @@ a {
 
 .text-center {
 	text-align: center;
+}
+
+.double {
+	-webkit-transform: scale(3);
 }
 
 .nav {
@@ -123,6 +131,20 @@ a {
 
 #matterinfo {
 	-webkit-transform:translate3d(200%,0,0);
+}
+
+#antihydrogen {
+	position: absolute;
+	left: 50%;
+	top: 4em;
+	margin-left: -22.5px;
+	z-index: -1;
+}
+
+#hydrogenAtom {
+	position: absolute;
+	top:4em;
+	-webkit-transform:scale(3);
 }
 
 /*.btn {
