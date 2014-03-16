@@ -16,4 +16,11 @@ $(function(){
   function outputOrientation(eventData){
     $(".orientation").html(eventData.beta);
   }
+
+  // Template events
+  Template.mobile.events = {
+    'click .instructions': function() {
+      alert("You clicked it now, mofuckah!");
+    }
+  }
 });
