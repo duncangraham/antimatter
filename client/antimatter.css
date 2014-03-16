@@ -4,18 +4,45 @@ body {
 	font-size: 1.5em;
 }
 
-.center {
-	margin: 0px auto;
+a {
+	color:#FFF;
+	text-decoration: none;
 }
 
-.center-janky {
-	left: 50%;
-	margin-left: -42.5px;
+.center {
+	margin: 0px auto;
 }
 
 .text-center {
 	text-align: center;
 }
+
+.nav {
+	position: fixed;
+	top: 50%;
+	width: 1.35em;
+	height: 1.35em;
+	border: 1px solid #FFF;
+	border-radius: 2em;
+	opacity: .2;
+}
+
+.nav.active {
+	opacity: 1;
+}
+
+.nav:hover {
+
+}
+
+.nav-forward {
+	right:1em;
+}
+
+.nav-back {
+	left:1em;
+}
+
 
 .italic {
 	font-style: italic;
