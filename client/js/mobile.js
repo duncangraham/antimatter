@@ -4,7 +4,7 @@ $(function(){
 
     // Listen for the event and handle DeviceOrientationEvent object
     window.addEventListener('deviceorientation', 
-                            outputOrientation, 
+                            handleTilting, 
                             false);
   }
   else {
@@ -13,7 +13,7 @@ $(function(){
   }
 
 
-  function outputOrientation(eventData){
+  function handleTilting(eventData){
     $(".orientation").html(eventData.beta);
   }
 
