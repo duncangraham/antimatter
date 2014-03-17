@@ -14,8 +14,8 @@ $(function(){ //DOM Ready
     //get number of users
     numUsers = Votes.findOne({voteType: "up"}).amount 
       + Votes.findOne({voteType: "down"}).amount;
-    console.log("users = " + users);
-    return users;
+    console.log("numUsers = " + numUsers);
+    return numUsers;
   }
 
   Template.game.upVotes = function() {
