@@ -35,12 +35,48 @@ a {
 	padding:1em;
 }
 
+.pt1 {
+	padding-top:1em;
+}
+
+.pb1 {
+	padding-bottom:1em;
+}
+
 .m1 {
 	margin:1em;
 }
 
+.mb170 {
+	margin-bottom: 170%;
+}
+
+.mb25 {
+	margin-bottom: 25%;
+}
+
+.mt25 {
+	margin-top: 25%;
+}
+
+.pt25 {
+	padding-top: 25%;
+}
+
+.pb25 {
+	padding-bottom: 25%;
+}
+
 .h100 {
 	height: 100%;
+}
+
+.h50 {
+	height: 50%;
+}
+
+.h33 {
+	height:33.33%;
 }
 
 .h1 {
@@ -63,6 +99,10 @@ a {
 	width: 25%;
 }
 
+.w15 {
+	width: 15%;
+}
+
 .m50 {
 	margin-left: 50% 
 }
@@ -79,8 +119,32 @@ a {
 	display: block;
 }
 
+.relative {
+	position: relative;
+}
+
 .center {
 	margin: 0px auto;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.thin {
+	font-weight: 100;
+}
+
+.italic {
+	font-style: italic;
+}
+
+.overflow-hidden {
+	overflow: hidden;
 }
 
 .text-center {
@@ -89,6 +153,10 @@ a {
 
 .text-dark {
 	color: #14081B;
+}
+
+body .text-large {
+	font-size: 1.25em;
 }
 
 body .text-small {
@@ -134,10 +202,6 @@ body .text-mini {
 	left:1em;
 }
 
-.italic {
-	font-style: italic;
-}
-
 .tag {
 	margin: 1em;
 	font-size:1.2em;
@@ -146,10 +210,6 @@ body .text-mini {
 .logo {
 	width: 50%;
 	padding-top:10em;
-}
-
-.large {
-	width:100%;
 }
 
 #hydrogen {
@@ -250,3 +310,4 @@ width: 100%;
 	background-color: #14081B;
 	border: 1px solid #FFF;
 }
+
