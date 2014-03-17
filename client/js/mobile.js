@@ -128,9 +128,18 @@ $(function(){
     // }
   }
 
+
+  // remove this user's vote from the DB when they close the mobile page
+  //SCARY WARNING!!! THIS IS UNTESTED AS OF YET.  PROCEED WITH CAUTION!
   Template.mobile.destroyed = function() {
-    // remove this user's vote from the DB
+    if (Session.get("myVote") == DOWN) {
+      dbChangeVotes( "down", -1 );
+    }
+    else if (Session.get("myVote") == UP) {
+      dbChangeVotes( "up", -1 );
+    }
   }
+
 
   function outputDebugging() {
     $(".orientation").html(
