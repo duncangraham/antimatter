@@ -2,12 +2,12 @@ $(function(){ //DOM Ready
 	
 }
 
-Template.game.users = function() {
-  //get number of users
-}
+  // reminder: database has the schema...
+  //      voteType:     amount:
+  //      "up"          3
+  //      "down"        7
 
-Template.game.upVotes = function() {
-  //get number of upvotes
+
 }
 
 Template.game.voteCount = function() {
