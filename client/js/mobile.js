@@ -7,6 +7,8 @@ $(function(){
   Session.set("myVote", NOT_SET);
   console.log("Current Vote = " + NOT_SET);
 
+  $(".orientation").html("Your vote = " + Session.get("myVote"));
+
 
   //Database collections
   //    database has the schema:
@@ -48,6 +50,7 @@ $(function(){
     if (Session.get("myVote") == NOT_SET) {
       Session.set("myVote", UP);
       dbChangeVotes("up", 1);
+      outputDebugging();
       return
     }
 
@@ -56,6 +59,7 @@ $(function(){
       Session.set("myVote", UP);
       dbChangeVotes("up", 1);
       dbChangeVotes("down", -1);
+      outputDebugging();
     }
   }
 
@@ -65,6 +69,7 @@ $(function(){
     if (Session.get("myVote") == NOT_SET) {
       Session.set("myVote", DOWN);
       dbChangeVotes("down", 1);
+      outputDebugging();
       return
     }
 
@@ -73,6 +78,7 @@ $(function(){
       Session.set("myVote", DOWN);
       dbChangeVotes("down", 1);
       dbChangeVotes("up", -1);
+      outputDebugging();
     }
   }
 
