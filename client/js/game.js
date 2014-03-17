@@ -1,6 +1,4 @@
 $(function(){ //DOM Ready
-	
-}
 
   // reminder: database has the schema...
   //      voteType:     amount:
