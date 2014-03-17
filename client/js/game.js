@@ -4,6 +4,15 @@ $(function(){ //DOM Ready
   //      voteType:     amount:
   //      "up"          3
   //      "down"        7
+  Meteor.startup(function() {
+       Session.set('data_loaded', false); 
+  }); 
+
+  Meteor.subscribe('default_db_data', function(){
+     //Set the reactive session as true to indicate that the data has
+     //been loaded
+     Session.set('data_loaded', true); 
+  });
 
 
   Template.game.rendered = function() {
@@ -17,11 +26,16 @@ $(function(){ //DOM Ready
   // returns the current number of users that have cast their vote
   //
   Template.game.users = function() {
-    //get number of users
-    numUsers = Votes.findOne({voteType: "up"}).amount 
-      + Votes.findOne({voteType: "down"}).amount;
-    console.log("numUsers = " + numUsers);
-    return numUsers;
+    //NOTE: there's a weird error here where if you visit the page
+    //directly, it'll give an error saying that the Votes.findOne each
+    //return undefined.  But if you refresh the page, it'll load
+    //everything just fine.  Not sure why.
+    if(Session.get('data_loaded')){
+      numUsers = Votes.findOne({voteType: "up"}).amount 
+        + Votes.findOne({voteType: "down"}).amount;
+      console.log("numUsers = " + numUsers);
+      return numUsers;
+    }
   }
 
 
@@ -34,9 +48,11 @@ $(function(){ //DOM Ready
   Template.game.upVotes = function() {
     //get number of upvotes
     // return Votes.findOne({voteType: "up"}).amount;
-    numUpVotes = Votes.findOne({voteType: "up"}).amount 
-    console.log( "numUpVotes = " + numUpVotes );
-    return numUpVotes;
+    if(Session.get('data_loaded')){
+      numUpVotes = Votes.findOne({voteType: "up"}).amount 
+      console.log( "numUpVotes = " + numUpVotes );
+      return numUpVotes;
+    }
   }
 
 
@@ -53,11 +69,13 @@ $(function(){ //DOM Ready
   // function will return 6
   // 
   Template.game.voteCount = function() {
-    numUpVotes = Votes.findOne({voteType: "up"}).amount 
-    numDownVotes = Votes.findOne({voteType: "down"}).amount 
+    if(Session.get('data_loaded')){
+      numUpVotes = Votes.findOne({voteType: "up"}).amount 
+      numDownVotes = Votes.findOne({voteType: "down"}).amount 
 
-    console.log("voteCount = " + numUpVotes - numDownVotes);
-    return numUpVotes - numDownVotes;
+      console.log("voteCount = " + numUpVotes - numDownVotes);
+      return numUpVotes - numDownVotes;
+    }
   }
 
 });
