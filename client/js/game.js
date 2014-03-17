@@ -8,7 +8,9 @@ $(function(){ //DOM Ready
   //      "down"        7
 
 
-}
+  Template.game.rendered = function() {
+	  
+  }
 
 Template.game.voteCount = function() {
   //get total number of all votes submitted
