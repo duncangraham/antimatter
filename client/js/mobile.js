@@ -9,8 +9,11 @@ $(function(){
 
 
   //Database collections
-  upVotes = new Meteor.Collection("upVotes");
-  downVotes = new Meteor.Collection("downVotes");
+  //    database has the schema:
+  //      voteType:     amount:
+  //      "up"          3
+  //      "down"        7
+  Votes = new Meteor.Collection("votes");
 
 
   //Capture device orientation
