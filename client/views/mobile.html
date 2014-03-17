@@ -1,19 +1,48 @@
-<template name="mobile">
-  <div class="instructions text-center">
-    <h1>Will antimatter fall up or down?</h1>
-    <h3>Tilt your phone forward for up, backward for down</h3>
-    <button class="begin-tilting">Begin</button>
-  </div>
+ <template name="mobile">
+  <div class="overflow-hidden h100 w100">
+    <div class="instructions text-center h100 w100 light bold">
+      
+      
+      <div class="tk-open-sans uppercase text-mini thin p1">
+        unaffected by gravity
+        <p class="text-small">(tilt towards you)</p>
+      </div>
+      <img src="up-light.svg" alt="" class="w15 center" />
 
-  <div class="indicators">
-    <div class="up-indicator vert-text-center text-center">
-      UP
+      <p class="tk-open-sans uppercase p1">Tilt your device to vote how the particle is affected</p>
+
+
+      <img src="down-light.svg" alt="" class="w15 center" />
+      <div class="tk-open-sans uppercase text-mini thin p1">
+        affected by gravity
+        <p class="text-small">(tilt away from you)</p>
+      </div>
+<!--         <div class="orientation">
+        </div>
+         <div class="beta">
+        </div> -->
+
     </div>
-    <div class="down-indicator vert-text-center text-center">
-      DOWN
+
+  <div id="voteChoice" class="votes w100">
+
+
+    <div class="w100 h33 dark mb170 text-center bold text-large relative">
+      <div class="tk-open-sans uppercase w100" style="position: absolute; top: 33%;">
+        <img src="up-light.svg" alt="" class="w25 center pb1">
+        <p>unaffected</p>
+        <p class="text-small">by gravity</p>
+      </div>
+    </div>
+
+    <div class="w100 h33 dark text-center text-large pb25 relative">
+      <div class="tk-open-sans uppercase text-center bold w100" style="position: absolute; bottom: 33%;">
+        affected 
+        <p class="text-small">by gravity</p>
+        <img src="down-light.svg" alt="" class="w25 center pt1">
+      </div>
     </div>
   </div>
-<!--  -->
-<!--   <div class="orientation"> -->
-<!--   </div> -->
+</div>
+
 </template>

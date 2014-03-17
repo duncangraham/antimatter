@@ -1,10 +1,8 @@
-//Universal styles
-.center {
-  margin: 0px auto;
-}
-
-.text-center {
-  text-align: center;
+#voteChoice {
+  /*-webkit-transform: translate3d(0,-100%,0);*/
+  height:300%;
+  position: absolute;
+  top: -100%;
 }
 
 .orientation {
@@ -13,10 +11,10 @@
   width: 300px;
 }
 
-
-//Instruction frame
 .instructions {
   font-size: 1.3em;
+  position: fixed;
+  padding-top: 15%
 }
 
 .instructions button.begin-tilting {
