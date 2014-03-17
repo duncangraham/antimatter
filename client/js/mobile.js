@@ -4,6 +4,9 @@ $(function(){
   var DOWN = -1;
   var NOT_SET = 0;
 
+  Session.set("myVote", NOT_SET);
+  console.log("Current Vote = " + NOT_SET);
+
 
   //Database collections
   upVotes = new Meteor.Collection("upVotes");
