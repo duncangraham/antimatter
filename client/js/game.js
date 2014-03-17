@@ -18,6 +18,7 @@ $(function(){ //DOM Ready
     return numUsers;
   }
 
+
   Template.game.upVotes = function() {
     //get number of upvotes
     // return Votes.findOne({voteType: "up"}).amount;
@@ -26,8 +27,13 @@ $(function(){ //DOM Ready
     return numUpVotes;
   }
 
+
   Template.game.voteCount = function() {
-    //get total number of all votes submitted
+    numUpVotes = Votes.findOne({voteType: "up"}).amount 
+    numDownVotes = Votes.findOne({voteType: "down"}).amount 
+
+    console.log("voteCount = " + numUpVotes - numDownVotes);
+    return numUpVotes - numDownVotes;
   }
 
 });
