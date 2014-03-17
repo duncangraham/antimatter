@@ -128,6 +128,9 @@ $(function(){
     // }
   }
 
+  Template.mobile.destroyed = function() {
+    // remove this user's vote from the DB
+  }
 
   function outputDebugging() {
     $(".orientation").html(
