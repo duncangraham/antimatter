@@ -28,5 +28,8 @@ $(function(){ //DOM Ready
     return numUpVotes;
   }
 
+  Template.game.voteCount = function() {
+    //get total number of all votes submitted
+  }
 
 });
