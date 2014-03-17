@@ -13,6 +13,7 @@ $(function(){
   }
 
 
+  //for now, make it binary.  Only up or down
   function handleTilting(eventData){
     if (eventData.beta >= 0){
       voteUp(); // submit a vote of "up"
