@@ -36,13 +36,38 @@ $(function(){
     $(".orientation").html(eventData.beta);
   }
 
+
   function voteUp(){
-    //increment the vote counter
+    //If user hasn't submitted a vote yet
+    if (Session.get("myVote") == NOT_SET) {
+      Session.set("myVote", UP);
+      //increment upVotes record
+      return
+    }
+
+    if (Session.get("myVote") == DOWN) {
+      Session.set("myVote", UP);
+      //increment upVotes record
+      //decrement downVotes record
+    }
   }
 
+
   function voteDown(){
-    //decrement the vote counter
+    //If user hasn't submitted a vote yet
+    if (Session.get("myVote") == NOT_SET) {
+      Session.set("myVote", DOWN);
+      //increment downVotes record
+      return
+    }
+
+    if (Session.get("myVote") == UP) {
+      Session.set("myVote", DOWN);
+      //increment upVotes record
+      //decrement downVotes record
+    }
   }
+
 
   // Template events
   Template.mobile.events = {
