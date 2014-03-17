@@ -93,6 +93,18 @@ $(function(){
     'click .instructions': function() {
       $(".instructions").hide();
       $(".indicators").show();
+    },
+
+    'click .up-indicator': function() {
+      voteUp();
+      console.log(Votes.findOne({voteType: "up"}));
+      console.log(Votes.findOne({voteType: "down"}));
+    },
+
+    'click .down-indicator': function() {
+      voteDown();
+      console.log(Votes.findOne({voteType: "up"}));
+      console.log(Votes.findOne({voteType: "down"}));
     }
   }
 });
