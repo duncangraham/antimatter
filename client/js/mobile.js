@@ -1,4 +1,5 @@
-$(function(){
+Template.mobile.rendered = function() {
+
   //make "Constants"
   var UP = 1,
       DOWN = -1,
@@ -106,27 +107,6 @@ $(function(){
     return Votes.find();
   };
 
-  
-  // Template events
-  Template.mobile.events = {
-    // 'click .begin-tilting': function() {
-    //   $(".instructions").hide();
-    //   $(".indicators").show();
-    //   beginButtonPushed = true;
-    // },
-
-    // 'click .up-indicator': function() {
-    //   voteUp();
-    //   console.log(Votes.findOne({voteType: "up"}));
-    //   console.log(Votes.findOne({voteType: "down"}));
-    // },
-
-    // 'click .down-indicator': function() {
-    //   voteDown();
-    //   console.log(Votes.findOne({voteType: "up"}));
-    //   console.log(Votes.findOne({voteType: "down"}));
-    // }
-  }
 
 
   function outputDebugging() {
@@ -135,5 +115,5 @@ $(function(){
         " Total: Up = " + Votes.findOne({voteType: "up"}).amount 
         + ", Down = " + Votes.findOne({voteType: "down"}).amount);
   }
+}
 
-});
