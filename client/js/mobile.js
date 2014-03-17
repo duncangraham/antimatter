@@ -1,4 +1,10 @@
 $(function(){
+  //make "Constants"
+  var UP = 1;
+  var DOWN = -1;
+  var NOT_SET = 0;
+
+
   if (window.DeviceOrientationEvent) {
     console.log("Tile recognition found");
 
