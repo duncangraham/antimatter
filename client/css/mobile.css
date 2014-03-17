@@ -1,0 +1,67 @@
+//Universal styles
+.center {
+  margin: 0px auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.orientation {
+  border: 1px white solid;
+  height: 30px;
+  width: 300px;
+}
+
+
+//Instruction frame
+.instructions {
+  font-size: 1.3em;
+}
+
+.instructions button.begin-tilting {
+  width:30%;
+  background: #3e9cbf;
+  padding: 8px 14px 10px;
+  border:1px solid #3e9cbf;
+  cursor:pointer;
+
+  /* text styling */
+  font-size:1.5em;
+  font-family:Oswald, sans-serif;
+  letter-spacing:.1em;
+  text-shadow: 0 -1px 0px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  /*give the corners a small curve*/
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+
+//Indicators frame
+body {
+  height: 100%;
+  width: 100%;
+}
+
+.indicators {
+  display: none;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.indicators .up-indicator {
+  line-height: 11em;
+  height:50%
+}
+
+.indicators .down-indicator {
+  line-height: 11em;
+  height:50%
+}
+
+.indicators .vert-text-center {
+  vertical-align: middle;
+}
