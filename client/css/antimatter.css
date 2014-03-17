@@ -2,6 +2,11 @@ html, body {
 	height: 100%;
 }
 
+* {
+	margin:0px;
+	padding: 0px;
+}
+
 body {
 	background-color: #14081B;
 	color: #FFF;
@@ -9,12 +14,70 @@ body {
 	width: 100%;
 }
 
+.dark {
+	color: #FFF;
+	background-color: #14081B;
+}
+
+.light {
+	background-color: #FFF;
+	color: #14081B;
+}
 
 a {
 	color:#FFF;
 	text-decoration: none;
 }
 
+/* Widths and margins */
+
+.p1 {
+	padding:1em;
+}
+
+.m1 {
+	margin:1em;
+}
+
+.h100 {
+	height: 100%;
+}
+
+.h1 {
+	height: 1em;
+}
+
+.w100 {
+	width: 100%;
+}
+
+.w75 {
+	width: 75%;
+}
+
+.w50 {
+	width: 50%;
+}
+
+.w25 {
+	width: 25%;
+}
+
+.m50 {
+	margin-left: 50% 
+}
+
+.m25 {
+	margin-left: 25%;
+}
+
+.left {
+	float:left;
+}
+
+.block {
+	display: block;
+}
 
 .center {
 	margin: 0px auto;
@@ -22,6 +85,22 @@ a {
 
 .text-center {
 	text-align: center;
+}
+
+.text-dark {
+	color: #14081B;
+}
+
+body .text-small {
+	font-size: .9em;
+}
+
+body .text-mini {
+	font-size: .6em;
+}
+
+.double {
+	-webkit-transform: scale(3);
 }
 
 .nav {
@@ -88,45 +167,86 @@ a {
 	bottom: 1em;
 }
 
+.bottom-center {
+	position: absolute;
+	bottom: 1em;
+	left:50%;
+}
+
 #matter {
 	position: absolute;
 	width:100%;
 	height:100%;
 	background-color: #FFF;
+	overflow: hidden;
+	display: none; /* this gets overwritten on mousemove */
 }
 
-/*.btn {
-	width: 3em;
+#matterinfo {
+	-webkit-transform:translate3d(200%,0,0);
+}
+
+#antihydrogen {
+	position: absolute;
+	left: 50%;
+	top: 4em;
+	margin-left: -22.5px;
+	z-index: -1;
+}
+
+#hydrogenAtom {
+	position: absolute;
+	top:4em;
+	-webkit-transform:scale(3);
+}
+
+.btn {
+	min-width: 10em;
 	padding: .25em .5em;
 	cursor: pointer;
-}
-
-.btn:after {
-	content: '';
-	position: absolute;
-	z-index: -1;
-	-webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
+	z-index: 3;
+	font-size: .75em;
 	transition: all 0.3s;
 }
 
+/*
+.btn:after {
+	content: '';
+	position: absolute;
+	width: 0%;
+	height: 100%;
+	z-index: -1;
+	top: 0;
+	left: 0;
+	background-color: #FFF;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+}
+
+.btn:hover:after, .btn:active:after {
+width: 100%;
+}
+*/
+
 .btn-dark {
 	border: 1px solid #FFF;
+	background-color: #14081B;
 }
 
 .btn-dark:hover {
 	color:#14081B;
+	background-color: #FFF;
+	border: 1px solid #14081B;
 }
 
-.btn-dark:hover:after, .btn-dark:active:after {
-width: 100%;
+.btn-light {
+	color:#14081B;
+	border: 1px solid #14081B;
+	background-color: #FFF;
 }
 
-.btn-dark:after {
-width: 0%;
-height: 100%;
-top: 0;
-left: 0;
-background: #FFF;
-}*/
-
+.btn-light:hover {
+	color:#FFF;
+	background-color: #14081B;
+	border: 1px solid #FFF;
+}
