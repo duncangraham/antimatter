@@ -12,8 +12,13 @@ $(function(){ //DOM Ready
 	  
   }
 
-Template.game.voteCount = function() {
-  //get total number of all votes submitted
-}
+  Template.game.users = function() {
+    //get number of users
+    numUsers = Votes.findOne({voteType: "up"}).amount 
+      + Votes.findOne({voteType: "down"}).amount;
+    console.log("users = " + users);
+    return users;
+  }
+
 
 });
