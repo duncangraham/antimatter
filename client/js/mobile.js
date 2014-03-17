@@ -44,37 +44,50 @@ $(function(){
 
 
   function voteUp(){
-    //If user hasn't submitted a vote yet
+    // If there was no previous vote, make "up"+1
     if (Session.get("myVote") == NOT_SET) {
       Session.set("myVote", UP);
-      //increment upVotes record
+      dbChangeVotes("up", 1);
       return
     }
 
+    // If previous vote was "down", make "up"+1 and "down"-1
     if (Session.get("myVote") == DOWN) {
       Session.set("myVote", UP);
-      //increment upVotes record
-      //decrement downVotes record
+      dbChangeVotes("up", 1);
+      dbChangeVotes("down", -1);
     }
   }
 
 
   function voteDown(){
-    //If user hasn't submitted a vote yet
+    // If there was no previous vote, make "down"+1
     if (Session.get("myVote") == NOT_SET) {
       Session.set("myVote", DOWN);
-      //increment downVotes record
+      dbChangeVotes("down", 1);
       return
     }
 
+    // If previous vote was "up", make "down"+1 and "up"-1
     if (Session.get("myVote") == UP) {
       Session.set("myVote", DOWN);
-      //increment upVotes record
-      //decrement downVotes record
+      dbChangeVotes("down", 1);
+      dbChangeVotes("up", -1);
     }
   }
 
 
+  function dbChangeVotes( direction, changeBy ){
+    Votes.update(
+      {_id: Votes.findOne({voteType: direction})._id}, 
+      {$inc: {amount: changeBy}});
+  }
+
+  //Template functions
+  Template.mobile.votes = function () {
+    return Votes.find();
+  };
+  
   // Template events
   Template.mobile.events = {
     'click .instructions': function() {
