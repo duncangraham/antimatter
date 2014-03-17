@@ -1,4 +1,4 @@
-Template.game.rendered = function() {
+$(function(){ //DOM Ready
 	
 }
 
@@ -13,3 +13,5 @@ Template.game.upVotes = function() {
 Template.game.voteCount = function() {
   //get total number of all votes submitted
 }
+
+});
