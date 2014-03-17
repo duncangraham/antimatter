@@ -4,6 +4,8 @@ $(function(){
   var DOWN = -1;
   var NOT_SET = 0;
 
+  var beginButtonPushed = false
+
   Session.set("myVote", NOT_SET);
   console.log("Current Vote = " + NOT_SET);
 
@@ -20,8 +22,6 @@ $(function(){
 
   //Capture device orientation
   if (window.DeviceOrientationEvent) {
-    console.log("Tile recognition found");
-
     // Listen for the event and handle DeviceOrientationEvent object
     window.addEventListener('deviceorientation', 
                             handleTilting, 
@@ -35,21 +35,22 @@ $(function(){
 
   //for now, make the voting binary.  Only up or down
   function handleTilting(eventData){
-    if (eventData.beta >= 0){
-      voteUp(); // submit a vote of "up"
-    } 
-    else {
-      voteDown();// submit a vote of "down"
+    if (beginButtonPushed) {
+      if (eventData.beta >= 0){
+        voteUp(); // submit a vote of "up"
+      } 
+      else {
+        voteDown();// submit a vote of "down"
+      }
     }
-    $(".orientation").html(eventData.beta);
   }
 
 
   function voteUp(){
     // If there was no previous vote, make "up"+1
     if (Session.get("myVote") == NOT_SET) {
-      Session.set("myVote", UP);
       dbChangeVotes("up", 1);
+      Session.set("myVote", UP);
       outputDebugging();
       return
     }
@@ -67,8 +68,8 @@ $(function(){
   function voteDown(){
     // If there was no previous vote, make "down"+1
     if (Session.get("myVote") == NOT_SET) {
-      Session.set("myVote", DOWN);
       dbChangeVotes("down", 1);
+      Session.set("myVote", DOWN);
       outputDebugging();
       return
     }
@@ -89,16 +90,19 @@ $(function(){
       {$inc: {amount: changeBy}});
   }
 
+
   //Template functions
   Template.mobile.votes = function () {
     return Votes.find();
   };
+
   
   // Template events
   Template.mobile.events = {
-    'click .instructions': function() {
+    'click .begin-tilting': function() {
       $(".instructions").hide();
       $(".indicators").show();
+      beginButtonPushed = true;
     },
 
     'click .up-indicator': function() {
@@ -113,4 +117,13 @@ $(function(){
       console.log(Votes.findOne({voteType: "down"}));
     }
   }
+
+
+  function outputDebugging() {
+    $(".orientation").html(
+        "Your vote = " + Session.get("myVote") + 
+        " Total: Up = " + Votes.findOne({voteType: "up"}).amount 
+        + ", Down = " + Votes.findOne({voteType: "down"}).amount);
+  }
+
 });
