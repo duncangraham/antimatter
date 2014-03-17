@@ -20,5 +20,13 @@ $(function(){ //DOM Ready
     return users;
   }
 
+  Template.game.upVotes = function() {
+    //get number of upvotes
+    // return Votes.findOne({voteType: "up"}).amount;
+    numUpVotes = Votes.findOne({voteType: "up"}).amount 
+    console.log( "numUpVotes = " + numUpVotes );
+    return numUpVotes;
+  }
+
 
 });
