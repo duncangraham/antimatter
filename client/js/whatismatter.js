@@ -23,6 +23,8 @@ Template.whatismatter.rendered = function ( ) {
 			atom = document.getElementById("hydrogenAtom"),
 			width = $(window).width(),
 			percent;
+
+			//TODO: ON RESIZE, RECALC
 			
 	$('body').mousemove(function(e){
 			cursor.style.display = 'block';

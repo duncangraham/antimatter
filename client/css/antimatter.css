@@ -10,6 +10,9 @@ body {
 	margin: 0em;
 }
 
+.light {
+	background-color: #FFF;
+}
 
 a {
 	color:#FFF;
@@ -22,19 +25,20 @@ a {
 	padding:1em;
 }
 
+.h100 {
+	height: 100%;
+}
+
 .w100 {
 	width: 100%;
-	float:left;
 }
 
 .w50 {
 	width: 50%;
-	float:left;
 }
 
 .w25 {
 	width: 25%;
-	float:left;
 }
 
 .m50 {
@@ -51,6 +55,14 @@ a {
 
 .text-center {
 	text-align: center;
+}
+
+.text-dark {
+	color: #14081B;
+}
+
+body .text-small {
+	font-size: .9em;
 }
 
 .double {
@@ -118,6 +130,7 @@ a {
 
 .bottom {
 	position: absolute;
+	left:50%;
 	bottom: 1em;
 }
 
@@ -127,6 +140,7 @@ a {
 	height:100%;
 	background-color: #FFF;
 	overflow: hidden;
+	display: none; /* this gets overwritten on mousemove */
 }
 
 #matterinfo {
@@ -147,16 +161,23 @@ a {
 	-webkit-transform:scale(3);
 }
 
-/*.btn {
-	width: 3em;
+.btn {
+	min-width: 10em;
 	padding: .25em .5em;
 	cursor: pointer;
+	z-index: 3;
+	font-size: .75em;
 }
 
 .btn:after {
 	content: '';
 	position: absolute;
+	width: 0%;
+	height: 100%;
 	z-index: -1;
+	top: 0;
+	left: 0;
+	background-color: #FFF;
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
 	transition: all 0.3s;
@@ -164,21 +185,14 @@ a {
 
 .btn-dark {
 	border: 1px solid #FFF;
+	background-color: #14081B;
 }
 
 .btn-dark:hover {
 	color:#14081B;
+	border: 1px solid #14081B;
 }
 
-.btn-dark:hover:after, .btn-dark:active:after {
+.btn:hover:after, .btn:active:after {
 width: 100%;
 }
-
-.btn-dark:after {
-width: 0%;
-height: 100%;
-top: 0;
-left: 0;
-background: #FFF;
-}*/
-

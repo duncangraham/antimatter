@@ -33,3 +33,21 @@ Template.whatismatter.created = function ( ) {
 	  return 'active';
 	};
 }
+
+Template.game.created = function ( ) { 
+	Template.nav.forwardURL = function () {
+	  return '/crowdcrafting';
+	};
+
+	Template.nav.forwardActive = function () {
+	  return 'active';
+	};
+
+	Template.nav.backwardURL = function () {
+	  return '/whatismatter';
+	};
+
+	Template.nav.backwardActive = function () {
+	  return 'active';
+	};
+}
