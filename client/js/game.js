@@ -7,7 +7,7 @@ $(function(){ //DOM Ready
 
 
   Template.game.rendered = function() {
-	  
+	  //still to be completed...  
   }
 
 
