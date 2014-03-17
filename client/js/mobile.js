@@ -5,6 +5,12 @@ $(function(){
   var NOT_SET = 0;
 
 
+  //Database collections
+  upVotes = new Meteor.Collection("upVotes");
+  downVotes = new Meteor.Collection("downVotes");
+
+
+  //Capture device orientation
   if (window.DeviceOrientationEvent) {
     console.log("Tile recognition found");
 
