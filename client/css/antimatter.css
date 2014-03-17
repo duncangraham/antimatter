@@ -2,16 +2,26 @@ html, body {
 	height: 100%;
 }
 
+* {
+	margin:0px;
+	padding: 0px;
+}
+
 body {
 	background-color: #14081B;
 	color: #FFF;
 	font-size: 1.5em;
 	width: 100%;
-	margin: 0em;
+}
+
+.dark {
+	color: #FFF;
+	background-color: #14081B;
 }
 
 .light {
 	background-color: #FFF;
+	color: #14081B;
 }
 
 a {
@@ -25,12 +35,24 @@ a {
 	padding:1em;
 }
 
+.m1 {
+	margin:1em;
+}
+
 .h100 {
 	height: 100%;
 }
 
+.h1 {
+	height: 1em;
+}
+
 .w100 {
 	width: 100%;
+}
+
+.w75 {
+	width: 75%;
 }
 
 .w50 {
@@ -47,6 +69,10 @@ a {
 
 .m25 {
 	margin-left: 25%;
+}
+
+.left {
+	float:left;
 }
 
 .block {

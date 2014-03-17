@@ -1,7 +1,25 @@
 <template name="game">
 	{{> nav}}
 
-	<div class="w100 h100 light">
+	<div class="w100 h100">
+		<div class="w75 h100 left light" style="position: relative;">
+			<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%">
+			  <defs> 
+			    <pattern id="grid" width="11" height="11" patternUnits="userSpaceOnUse">
+			      <rect fill="white" x="0" y="0" width="9" height="9"/>
+			      <rect fill="aliceblue" x="10" y="0" width="1" height="10"/>
+			      <rect fill="aliceblue" x="0" y="10" width="11" height="1"/>
+			    </pattern>
+			  </defs>
+			  <rect fill="url(#grid)" x="0" y="0" width="100%" height="100%"/>
+			</svg>
+			<div class="w75 m1 dark h1 bottom-center" style="margin-left:-360px">
+				<p class="tk-open-sans text-center text-mini w100 dark">
+				{{users}}0 USERS VOTING
+				</p>
+			</div>
+		</div>
+		<div class="w25 h100 left"></div>
 	</div>
 
 </template>
