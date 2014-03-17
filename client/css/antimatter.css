@@ -49,6 +49,10 @@ a {
 	margin-left: 25%;
 }
 
+.block {
+	display: block;
+}
+
 .center {
 	margin: 0px auto;
 }
@@ -63,6 +67,10 @@ a {
 
 body .text-small {
 	font-size: .9em;
+}
+
+body .text-mini {
+	font-size: .6em;
 }
 
 .double {
@@ -130,8 +138,13 @@ body .text-small {
 
 .bottom {
 	position: absolute;
-	left:50%;
 	bottom: 1em;
+}
+
+.bottom-center {
+	position: absolute;
+	bottom: 1em;
+	left:50%;
 }
 
 #matter {
@@ -167,8 +180,10 @@ body .text-small {
 	cursor: pointer;
 	z-index: 3;
 	font-size: .75em;
+	transition: all 0.3s;
 }
 
+/*
 .btn:after {
 	content: '';
 	position: absolute;
@@ -180,8 +195,12 @@ body .text-small {
 	background-color: #FFF;
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
-	transition: all 0.3s;
 }
+
+.btn:hover:after, .btn:active:after {
+width: 100%;
+}
+*/
 
 .btn-dark {
 	border: 1px solid #FFF;
@@ -190,9 +209,18 @@ body .text-small {
 
 .btn-dark:hover {
 	color:#14081B;
+	background-color: #FFF;
 	border: 1px solid #14081B;
 }
 
-.btn:hover:after, .btn:active:after {
-width: 100%;
+.btn-light {
+	color:#14081B;
+	border: 1px solid #14081B;
+	background-color: #FFF;
+}
+
+.btn-light:hover {
+	color:#FFF;
+	background-color: #14081B;
+	border: 1px solid #FFF;
 }
