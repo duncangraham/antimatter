@@ -30,6 +30,7 @@ if ( Meteor.isClient ) {
 
 Template.game.rendered = function() {
 
+
   // reminder: database has the schema...
   //      voteType:     amount:
   //      "up"          3
@@ -120,11 +121,42 @@ Template.game.rendered = function() {
 
 }
 
+Template.game.runExperiment = function () {
+  //get the current vote count
+  var num = Math.random()*100-50; //-50 - 0 - 50
+
+  var line = draw.line(0, 0, 100, 150).stroke({ width: 1 })
+
+  line.plot(50, 30, 100, 150)
+
+};
+
+
   Template.game.events = {
     'click .add-point': function() {
       console.log( Votes.findOne() );
       $("ul.graph-data").append(
       '<li>' + Votes.findOne({voteType: "up"}).amount + '</li>');
+    },
+
+    'click .run': function() {
+      var draw = SVG(path).size('100%', '100%');
+      var x = 0,
+          y = 0,
+          newPoint;
+      var pointArr = [[0,1]];
+      var polyline = draw.polyline(pointArr).fill('none').stroke({ width: 1 });
+      
+      
+      setInterval(function(){
+        // console.log(Template.game.voteCount());
+        var y = Math.random()*300+100; //-50 - 0 - 50
+        newPoint = [x,y];
+        pointArr.push(newPoint);
+        var polyline = draw.polyline(pointArr).fill('none').stroke({ width: 1 });
+
+        x = x + 10;
+      }, 100);
     }
   }
 

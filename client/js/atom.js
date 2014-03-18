@@ -5,7 +5,7 @@ Atom = function (id, color) {
 		var antiproton = draw.rect( 15, 15 )
 				   	   		 			 .radius( 7.5 )
 				       		 			 .fill('#FFF')
-				       		 			 .move( 14.5, 14.5 );
+				       		 			 .move( 15, 15 );
 
 		var outline = draw.rect( 40, 40 )
 						  				.radius( 20 )
