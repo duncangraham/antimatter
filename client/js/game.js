@@ -1,4 +1,34 @@
-$(function(){ //DOM Ready
+if ( Meteor.isClient ) {
+    Votes = new Meteor.Collection("votes");
+
+    Deps.autorun(function() {
+      Meteor.subscribe('votes');
+      console.log('There are ' + Votes.find().count() + ' posts');
+
+
+      Template.game.users = function() {
+        if (Votes.findOne()) {
+          var numUsers = Votes.findOne({voteType: "up"}).amount + Votes.findOne({voteType: "down"}).amount;
+          console.log("numUsers = " + numUsers);
+          return numUsers;
+        }
+      }
+
+      Template.game.voteCount = function() {
+        if (Votes.findOne()) {
+          var numUpVotes = Votes.findOne({voteType: "up"}).amount,
+              numDownVotes = Votes.findOne({voteType: "down"}).amount
+
+          console.log("numUpVotes = " + numUpVotes);
+          console.log("numDownVotes = " + numDownVotes);
+          return numUpVotes - numDownVotes;
+        }
+      }
+    });
+}
+
+
+Template.game.rendered = function() {
 
   // reminder: database has the schema...
   //      voteType:     amount:
@@ -10,17 +40,6 @@ $(function(){ //DOM Ready
   //   setInterval( function(){addGraphPoint()}, 1000 )
   // }
 
-  //Start the page with data_loaded = false
-  Meteor.startup(function() {
-     Session.set('data_loaded', false); 
-  }); 
-
-
-  Votes = new Meteor.Collection("votes");
-
-  Deps.autorun(function() {
-    Meteor.subscribe('votes');
-  });
 
   // Meteor.subscribe('votes', function(){
   //   //Set the session var as true to indicate that the data has
@@ -40,11 +59,6 @@ $(function(){ //DOM Ready
   // ===============
   // Takes the current voteCount, puts it in <li> tags, and appends it to
   // ul.graph-data
-  //
-  function addGraphPoint() {
-    $("ul.graph-data").append(
-        '<li>' + Template.game.voteCount() + '</li>');
-  }
 
     
   //
@@ -71,14 +85,8 @@ $(function(){ //DOM Ready
     //directly, it'll give an error saying that the Votes.findOne each
     //return undefined.  But if you refresh the page, it'll load
     //everything just fine.  Not sure why.
-    if(Session.get('data_loaded')){
-      numUsers = Votes.findOne({voteType: "up"}).amount 
-        + Votes.findOne({voteType: "down"}).amount;
-      console.log("numUsers = " + numUsers);
-      return numUsers;
-    }
+      
   }
-
 
   //
   // Template.game.upVotes
@@ -89,11 +97,9 @@ $(function(){ //DOM Ready
   Template.game.upVotes = function() {
     //get number of upvotes
     // return Votes.findOne({voteType: "up"}).amount;
-    if(Session.get('data_loaded')){
-      numUpVotes = Votes.findOne({voteType: "up"}).amount 
+      var numUpVotes = Votes.findOne({voteType: "up"}).amount;
       console.log( "numUpVotes = " + numUpVotes );
       return numUpVotes;
-    }
   }
 
 
@@ -109,20 +115,16 @@ $(function(){ //DOM Ready
   // Example 2: if 10 people vote "up" and 4 people vote "down", this
   // function will return 6
   // 
-  Template.game.voteCount = function() {
-    if(Session.get('data_loaded')){
-      numUpVotes = Votes.findOne({voteType: "up"}).amount 
-      numDownVotes = Votes.findOne({voteType: "down"}).amount 
 
-      console.log("numUpVotes = " + numUpVotes);
-      console.log("numDownVotes = " + numDownVotes);
-      return numUpVotes - numDownVotes;
-    }
-  }
+
+
+}
 
   Template.game.events = {
     'click .add-point': function() {
-      addGraphPoint();
+      console.log( Votes.findOne() );
+      $("ul.graph-data").append(
+      '<li>' + Votes.findOne({voteType: "up"}).amount + '</li>');
     }
   }
-});
+

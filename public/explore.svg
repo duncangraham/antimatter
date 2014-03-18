@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="722px" height="215px" viewBox="0 0 722 215" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <title>explore</title>
+    <description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Triangle-1-+-Triangle-1-copy-+-Triangle-1-copy-2" sketch:type="MSLayerGroup" transform="translate(35.000000, -28.000000)">
+            <path d="M351.92292,143.868799 L409.42292,165.102208 L337.42292,21.1022084 L265.42292,165.102208 L322.92292,143.868799 L322.92292,241.897608 C322.92292,246.315239 326.507975,249.896437 330.924065,249.896437 L343.921776,249.896437 C348.340686,249.896437 351.92292,246.318924 351.92292,241.897608 L351.92292,143.868799 Z" id="Triangle-1" stroke="#FFFFFF" stroke-width="8" fill="#14081B" sketch:type="MSShapeGroup" transform="translate(337.422920, 135.602208) rotate(-30.000000) translate(-337.422920, -135.602208) "></path>
+            <path d="M577.876617,108.180803 L603.078595,108.180803 L571.289297,44.6022084 L539.5,108.180803 L564.887286,108.180803 L564.887286,254.610713 C564.887286,259.024294 568.471063,262.602208 572.891751,262.602208 L569.872152,262.602208 C574.292896,262.602208 577.876617,259.015739 577.876617,254.610713 L577.876617,108.180803 Z" id="Triangle-1-copy-2" stroke="#14081B" stroke-width="2" fill="#FFFFFF" sketch:type="MSShapeGroup" transform="translate(571.500000, 153.602208) rotate(-270.000000) translate(-571.500000, -153.602208) "></path>
+            <path d="M114.876617,108.180803 L140.078595,108.180803 L108.289297,44.6022084 L76.5,108.180803 L101.887286,108.180803 L101.887286,254.610713 C101.887286,259.024294 105.471063,262.602208 109.891751,262.602208 L106.872152,262.602208 C111.292896,262.602208 114.876617,259.015739 114.876617,254.610713 L114.876617,108.180803 Z" id="Triangle-1-copy-3" stroke="#14081B" stroke-width="2" fill="#FFFFFF" sketch:type="MSShapeGroup" transform="translate(108.500000, 153.602208) rotate(-90.000000) translate(-108.500000, -153.602208) "></path>
+        </g>
+    </g>
+</svg>

@@ -17,7 +17,6 @@ Template.mobile.rendered = function() {
   //      voteType:     amount:
   //      "up"          3
   //      "down"        7
-  Votes = new Meteor.Collection("votes");
 
 
   //Capture device orientation
