@@ -407,10 +407,14 @@ video.bgvid {
 opacity: .25;
 position: fixed;
 right: 0;
-bottom: 0;
+top: 0;
 z-index: -100;
 background-size: cover;
 }
+/*
+video.bgvid#particleVid {
+	z-index: 1;
+}*/
 
 video.bgvid#matterVid {
 	z-index: 1;
