@@ -39,6 +39,10 @@ a {
 	padding-top:1em;
 }
 
+.pl1 {
+	padding-left: 1em;
+}
+
 .pb1 {
 	padding-bottom:1em;
 }
@@ -171,6 +175,81 @@ body .text-mini {
 	-webkit-transform: scale(3);
 }
 
+/* NAV */
+
+.light .chapters {
+		background-color: #FFF;
+}
+
+.light .chapters li {
+	border-bottom: 3px solid #14081B;
+}
+
+.light .chapters li a {
+	color: #14081B;
+}
+
+.light .chapters li:hover a, .chapters li:active a {
+	color:#FFF;
+}
+
+.light .chapters li:after {
+		background-color: #14081B;
+}
+
+.shelf {
+	position: fixed;
+	z-index: 1000;
+	-webkit-transform: translate3d(0, -100%, 0);
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	overflow:auto;
+	height: 5em;
+}
+
+.shelf.open {
+	-webkit-transform: translate3d(0, 0%, 0);	
+}
+
+.chapters {
+	position: absolute;
+	overflow:auto; 
+	list-style-type: none;
+	background-color: rgba(20, 8, 27, .7);
+}
+
+.chapters li {
+	width: 19.6%;
+	border-bottom: 3px solid #FFF;
+	margin: 0em .2%;
+	line-height: 2em;
+	transition: all .3s;
+	position: relative;
+	z-index: 5;
+}
+
+.chapters li:hover a, .chapters li:active a {
+	color:#14081B;
+}
+
+.chapters li:after {
+	content: '';
+	position: absolute;
+	height: 0%;
+	width: 100%;
+	z-index: -1;
+	bottom: 0;
+	left: 0;
+	background-color: rgb(255, 255, 255);
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+}
+
+.chapters li:hover:after, .chapter li:active:after {
+height: 100%;
+}
+
+
 .nav {
 	position: fixed;
 	top: 50%;
@@ -201,6 +280,16 @@ body .text-mini {
 .nav-back {
 	left:1em;
 }
+
+.controls {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
+	text-shadow: 1px 1px 0px rgba(20, 8, 27, .3);
+}
+
+/*  */
 
 .tag {
 	margin: 1em;
