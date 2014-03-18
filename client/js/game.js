@@ -112,4 +112,9 @@ $(function(){ //DOM Ready
     }
   }
 
+  Template.game.events = {
+    'click .add-point': function() {
+      addGraphPoint();
+    }
+  }
 });
