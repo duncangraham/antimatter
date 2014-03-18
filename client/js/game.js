@@ -106,7 +106,8 @@ $(function(){ //DOM Ready
       numUpVotes = Votes.findOne({voteType: "up"}).amount 
       numDownVotes = Votes.findOne({voteType: "down"}).amount 
 
-      console.log("voteCount = " + numUpVotes - numDownVotes);
+      console.log("numUpVotes = " + numUpVotes);
+      console.log("numDownVotes = " + numDownVotes);
       return numUpVotes - numDownVotes;
     }
   }
