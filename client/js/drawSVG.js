@@ -1,3 +1,3 @@
 Template.landing.rendered = function() {
-	$('#bgvid')[0].play()
+	$('.bgvid')[0].play()
 }
