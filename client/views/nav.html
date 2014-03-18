@@ -1,13 +1,20 @@
 <template name="nav">
 	<nav>
+		<div class="shelf w100">
+			<ul class="chapters tk-open-sans w100 text-center">
+				<li class="left text-center"><a class="w100 block" href="/">Hello.</a></li>
+				<li class="left text-center"><a class="w100 block" href="/whatismatter">What is Matter?</a></li>
+				<li class="left text-center"><a class="w100 block" href="/aegis">Aegis</a></li>
+				<li class="left text-center"><a class="w100 block" href="/game">Game</a></li>
+				<li class="left text-center"><a class="w100 block" href="/implications">Join</a></li>
+			</ul>
+		</div>
 
-		<ul class="chapters">
-			<li>1. Hello.</li>
-			<li>2. What is Matter?</li>
-			<li>3. Aegis</li>
-			<li>4. Game</li>
-			<li>5. Join</li>
-		</ul>
+		<div class="controls text-mini uppercase tk-open-sans pt1 pl1">
+			<a href="" class="pb1 menu">menu</a>
+<!-- 			<span>  | </span>
+			<a href="">info</a> -->
+		</div>
 
 		<a href="{{backwardURL}}" class="nav nav-back text-center {{backwardActive}}">-</a>
 		<a href="{{forwardURL}}" class="nav nav-forward text-center {{forwardActive}}">+</a>
