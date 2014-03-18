@@ -136,7 +136,7 @@ $(function(){
   //
   // // remove this user's vote from the DB when they close the mobile page
   // //SCARY WARNING!!! THIS IS UNTESTED AS OF YET.  PROCEED WITH CAUTION!
-  // Template.mobile.destroyed = function() {
+  // window.onbeforeunload = function() {
   //   if (Session.get("myVote") == DOWN) {
   //     dbChangeVotes( "down", -1 );
   //   }
