@@ -4,32 +4,36 @@ $(function(){ //DOM Ready
   //      voteType:     amount:
   //      "up"          3
   //      "down"        7
+
+
   Meteor.startup(function() {
-       Session.set('data_loaded', false); 
+     Session.set('data_loaded', false); 
   }); 
 
-  Meteor.subscribe('default_db_data', function(){
-     //Set the reactive session as true to indicate that the data has
-     //been loaded
-     Session.set('data_loaded', true); 
 
-    //Reset votes to 0 on page load
+  Meteor.subscribe('default_db_data', function(){
+    //Set the session var as true to indicate that the data has
+    //been loaded
+    Session.set('data_loaded', true); 
+
+    resetVotes();
+  });
+
+
+    
+  //
+  // resetVotes()
+  // ============
+  // sets the "amount" of both upvotes and downvotes to 0
+  //
+  function resetVotes() {
     var voteTypes = ["up", "down"];
     for (var i = 0; i < voteTypes.length; i++){
       Votes.update(
         {_id: Votes.findOne({voteType: voteTypes[i]})._id}, 
         {$set: {amount: 0}});
     }
-
-    console.log("upVotes = " + Votes.findOne({voteType: "up"}).amount);
-    console.log("downVotes = " + Votes.findOne({voteType: "down"}).amount);
-  });
-
-
-  Template.game.rendered = function() {
-	  //still to be completed...  
   }
-
 
   //
   // Template.game.users
