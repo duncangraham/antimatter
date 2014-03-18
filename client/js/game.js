@@ -6,6 +6,8 @@ $(function(){ //DOM Ready
   //      "down"        7
 
 
+
+  //Start the page with data_loaded = false
   Meteor.startup(function() {
      Session.set('data_loaded', false); 
   }); 
