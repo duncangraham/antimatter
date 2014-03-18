@@ -5,6 +5,10 @@ $(function(){ //DOM Ready
   //      "up"          3
   //      "down"        7
 
+  //Call addGraphPoint every second
+  // if (document.URL.match(/game/)) {
+  //   setInterval( function(){addGraphPoint()}, 1000 )
+  // }
 
 
   //Start the page with data_loaded = false
@@ -21,6 +25,18 @@ $(function(){ //DOM Ready
     resetVotes();
   });
 
+
+
+  //
+  // addGraphPoint()
+  // ===============
+  // Takes the current voteCount, puts it in <li> tags, and appends it to
+  // ul.graph-data
+  //
+  function addGraphPoint() {
+    $("ul.graph-data").append(
+        '<li>' + Template.game.voteCount() + '</li>');
+  }
 
     
   //
