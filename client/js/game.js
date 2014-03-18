@@ -12,6 +12,17 @@ $(function(){ //DOM Ready
      //Set the reactive session as true to indicate that the data has
      //been loaded
      Session.set('data_loaded', true); 
+
+    //Reset votes to 0 on page load
+    var voteTypes = ["up", "down"];
+    for (var i = 0; i < voteTypes.length; i++){
+      Votes.update(
+        {_id: Votes.findOne({voteType: voteTypes[i]})._id}, 
+        {$set: {amount: 0}});
+    }
+
+    console.log("upVotes = " + Votes.findOne({voteType: "up"}).amount);
+    console.log("downVotes = " + Votes.findOne({voteType: "down"}).amount);
   });
 
 
