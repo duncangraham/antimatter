@@ -109,6 +109,23 @@ Template.mobile.rendered = function() {
 
 
 
+  // We aren't going to try to wipe the user's vote when they close the
+  // browser anymore.  We're going to make the db wipe
+  // when the "game" page is loaded.  We're going to make it unable to
+  // access the page without a username and password
+  //
+  // // remove this user's vote from the DB when they close the mobile page
+  // //SCARY WARNING!!! THIS IS UNTESTED AS OF YET.  PROCEED WITH CAUTION!
+  // window.onbeforeunload = function() {
+  //   if (Session.get("myVote") == DOWN) {
+  //     dbChangeVotes( "down", -1 );
+  //   }
+  //   else if (Session.get("myVote") == UP) {
+  //     dbChangeVotes( "up", -1 );
+  //   }
+  // }
+  //
+
   function outputDebugging() {
     $(".orientation").html(
         "Your vote = " + Session.get("myVote") + 

@@ -2,6 +2,12 @@
 	{{> nav}}
 
 	<div class="w100 h100">
+
+    <button class="add-point" style="margin-top: 100px">Add point</button>
+    <!-- each second's vote count goes here -->
+    <ul class="graph-data">
+    </ul>
+
 		<div class="w75 h100 left light" style="position: relative;">
 			<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%">
 			  <defs> 
@@ -15,11 +21,10 @@
 			</svg>
 			<div class="w75 m1 dark h1 bottom-center" style="margin-left:-360px">
 				<p class="tk-open-sans text-center text-mini w100 dark">
-				{{users}}0 USERS VOTING
+				{{users}} USERS VOTING
 				</p>
 			</div>
 		</div>
 		<div class="w25 h100 left"></div>
 	</div>
-
 </template>
