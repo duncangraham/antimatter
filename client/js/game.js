@@ -140,7 +140,11 @@ Template.game.runExperiment = function () {
     },
 
     'click .run': function() {
-      var draw = SVG(path).size('100%', '100%');
+      var foil = window.innerWidth*.75;
+      var vh = window.innerHeight*.5;
+
+      var draw = SVG('path').size('100%', '100%'),
+          impact = SVG('impact').size('15', '15');
       var x = 0,
           y = 0,
           newPoint;
@@ -148,15 +152,36 @@ Template.game.runExperiment = function () {
       var polyline = draw.polyline(pointArr).fill('none').stroke({ width: 1 });
       
       
-      setInterval(function(){
+      var particleShoot = setInterval(function(){
         // console.log(Template.game.voteCount());
-        var y = Math.random()*300+100; //-50 - 0 - 50
+        if ( x >= foil ) {
+          $('#impact').css({top: y, left: x-7.5});
+          var impactPoint = impact.rect( 15, 15 )
+                             .radius( 7.5 )
+                             .fill('#F07C86');
+          
+          if ( y > vh) {
+            // alert( 'affected by gravity!' )
+
+          } else if ( y < vh ) {
+            // alert( 'defied gravity!' )
+
+          } else {
+            // alert('neutral')
+
+          }
+
+          clearInterval(particleShoot)
+        }
+
+        console.log(vh/2);
+        y = Math.random()*300+vh/2;//Math.random()*300+100; //-50 - 0 - 50
         newPoint = [x,y];
         pointArr.push(newPoint);
-        var polyline = draw.polyline(pointArr).fill('none').stroke({ width: 1 });
+        polyline = polyline.plot(pointArr);
 
-        x = x + 10;
-      }, 100);
+        x = x + 1;
+      }, 1);
     }
   }
 
