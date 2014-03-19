@@ -398,6 +398,35 @@ height: 100%;
 width: 100%;
 }
 
+.btn-transparent {
+	border: 1px solid #FFF;
+	color:#FFF;
+	min-width: 10em;
+	padding: .25em .5em;
+	cursor: pointer;
+	z-index: 3;
+	font-size: .75em;
+	transition: all 0.3s;
+}
+
+.btn-transparent:after {
+	/* position: absolute; */
+	/* width: 0%; */
+	/* height: 100%; */
+	/* z-index: -1; */
+	/* top: 0; */
+	/* left: 0; */
+	background-color: #FFF;
+  color: #000;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+}
+
+.btn-transparent:hover {
+  color: #000;
+	background-color: #FFF;
+	border: 1px solid #14081B;
+}
 
 .btn-dark {
 	border: 1px solid #FFF;
