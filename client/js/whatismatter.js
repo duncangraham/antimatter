@@ -1,16 +1,23 @@
-Template.whatismatter.events = function() {
-	// 'mousemove': function () {
-	// 	var cursor = document.getElementById("mycursor");
-	// 	$('canvas').hover(function(){
-	// 		$('canvas').mousemove(function(e){
-	// 			cursor.style.display = 'block';
-	// 			cursor.style.top = e.pageY*1 + 5 + "px";
-	// 		    cursor.style.left = e.pageX*1 + 5 + "px";
-	// 		});	
-	// 	},function(){
-	// 		cursor.style.display = 'none';
-	// 	});
- //  }
+Template.whatismatter.events = {
+	'click .origins': function () {
+		$('#ORIGINS').addClass('ztop').animate({opacity: 1}, 200);
+		document.getElementById("ORIGINS").play();
+
+		$('.origins').hide();
+		$('#explore').hide();
+		$('.close').show();
+
+
+  },
+  'click .close': function () {
+		$('#ORIGINS').removeClass('ztop').animate({opacity: 0}, 200);
+		document.getElementById("ORIGINS").pause();
+		$('.origins').show();
+		$('#explore').show();
+		$('.close').hide();
+
+
+  }
 }
 
 
@@ -30,6 +37,7 @@ Template.whatismatter.rendered = function ( ) {
 			//TODO: ON RESIZE, RECALC
 			
 	$('#whatismatter').mousemove(function(e){
+		
 			cursor.style.display = 'block';
 			cursor.style.right = e.pageX*1 + "px";
 

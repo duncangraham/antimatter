@@ -26,14 +26,19 @@
 
 
 	<!-- <video preload="auto" loop id="bgvid" tabindex="0" poster="particle.png"> -->
-	<video preload="auto" id="antimatter" class="fade-in bgvid w100 center" tabindex="0" poster="antimatter.jpg">
+	<video preload="auto" id="antimatter" class="fade-in bgvid w100 center z-1" tabindex="0" poster="antimatter.jpg">
     <source src="ANTIMATTER.webm" type="video/webm">
     <source src="ANTIMATTER.mp4" type="video/mp4">
   </video>
 
-  <div class="text-small w25 bottom-center pb1 center ztop" style="margin-left:-12.5%">
-		<img class="center block w25 ztop" src="explore.svg" alt="explore" />
-	</div>
+<!--  <video preload="auto" id="ORIGINS" class="fade-in bgvid w100 center z-1" tabindex="0" poster="ORIGINS.jpg" style="opacity:0">
+    <source src="ORIGINS.webm" type="video/webm">
+    <source src="ORIGINS.mp4" type="video/mp4">
+  </video> -->
+
+
+
+
 
 <!-- 	<div class="text-small">
 		<p href="" class="btn btn-dark bottom-center center tk-open-sans text-center" style="margin-left: -5em">
@@ -41,5 +46,17 @@
 		</p>
 	</div> -->
 </div>
+ <video preload="auto" id="ORIGINS" class="fade-in bgvid w100 center z-1" tabindex="0" poster="ORIGINS.jpg" style="opacity:0">
+    <source src="ORIGINS.webm" type="video/webm">
+    <source src="ORIGINS.mp4" type="video/mp4">
+  </video>
+
+  <div class="bottom-center w25 ztop pb1" style="margin-left:-12.5%">
+			<div class="text-small w25 center pb1 w100 ztop">
+				<img class="center block w25 ztop" src="explore.svg" id="explore" alt="explore">
+			</div>
+			<div class="btn run tk-open-sans uppercase center w25 text-center btn-dark origins" style="">Origins</div>
+			<div class="btn run tk-open-sans uppercase center w25 text-center btn-dark close" style="display:none">Close</div>
+		</div>
 
 </template>
