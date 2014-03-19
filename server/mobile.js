@@ -4,7 +4,7 @@
 //   "down"        7
 
 Meteor.startup(function () {
-  Votes = new Meteor.Collection("votes");
+  // Votes = new Meteor.Collection("votes");
 
   if (Votes.find().count() === 0) {
     var voteTypes = ["up", "down"];

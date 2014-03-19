@@ -1,5 +1,5 @@
 if ( Meteor.isClient ) {
-    Votes = new Meteor.Collection("votes");
+    // Votes = new Meteor.Collection("votes");
 
     Deps.autorun(function() {
       // Meteor.subscribe('votes');
