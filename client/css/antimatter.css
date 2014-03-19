@@ -326,7 +326,15 @@ height: 100%;
 
 .bottom {
 	position: absolute;
-	bottom: 1em;
+	bottom: 2.5%;
+}
+
+.top {
+	top: 2.5%;
+}
+
+.middle {
+	top: 50%;
 }
 
 .bottom-center {
@@ -457,11 +465,9 @@ width: 100%;
 }
 
 video.bgvid {
-opacity: .25;
 position: fixed;
 right: 0;
 top: 0;
-z-index: -100;
 background-size: cover;
 }
 /*
@@ -473,16 +479,16 @@ video.bgvid#matterVid {
 	z-index: 1;
 }
 
-video#bgvid.fade-in {
-	opacity: 0;
-}
-
 .z1 {
 	z-index:1;
 }
 
 .z0 {
-	z-index:1;
+	z-index:0;
+}
+
+.z-1 {
+	z-index: -1;
 }
 
 .ztop {
@@ -499,6 +505,25 @@ svg {
 
 .top-left {
 	position:absolute;
-/*	top:0;
-	left:0;*/
+	top:0;
+	left:0;
 }
+
+.o5 {
+	opacity: .5;
+	cursor: pointer;
+	transition: opacity .2s;
+}
+
+.o5:hover {
+	opacity: 1;
+}
+
+video.active {
+	opacity: 1;
+}
+
+.absolute {
+	position: absolute;
+}
+

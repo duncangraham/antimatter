@@ -1,5 +1,3 @@
-
-
   // Meteor.startup(function () {
   // if (Session.get('data_loaded', true)) {
   //   Template.game.resetVotes();
@@ -31,6 +29,11 @@ Template.game.rendered = function() {
 
   Session.set( "upId", Votes.findOne({voteType: 'up'})._id );
   Session.set( "downId", Votes.findOne({voteType: 'down'})._id );
+
+  var middleVid = $('.middle');
+  var ml = middleVid.height()/2;
+
+  middleVid.css('margin-top', -ml);
 
   // Template.game.users = function() {
   //   return Votes.findOne({_id: Session.get('upId')}).amount;
@@ -152,7 +155,25 @@ Template.game.voteCount = function () {
 }
 
 
+// Template.game.preserve(['#preserve']);
+
+
   Template.game.events = {
+    'click video': function() {
+      var vidId = event.currentTarget.id;
+
+      if( $('#'+vidId).hasClass('active') ) {
+        document.getElementById(vidId).pause();
+        $('#'+vidId).removeClass('active');
+      } else {
+        $("video.active").removeClass('active');
+        document.getElementById("GAME1").pause();
+        document.getElementById("GAME2").pause();
+        document.getElementById("GAME3").pause();
+        document.getElementById(vidId).play();
+        $('#'+vidId).addClass('active');
+      }
+    },
     'click .add-point': function() {
       console.log( Votes.findOne() );
       $("ul.graph-data").append(
@@ -162,6 +183,18 @@ Template.game.voteCount = function () {
     'click .run': function() {
       var foil = window.innerWidth*.75;
       var vh = window.innerHeight*.5;
+
+      var trajectory = Math.floor(Math.random() * 6)-3;
+
+      console.log(trajectory);
+
+      if( trajectory == 2 || trajectory == 1 ) {
+        var inc = 1;
+      } else if( trajectory == -3 || trajectory == -2 ) {
+        var inc = -1;
+      } else {
+        var inc = 0;
+      }
 
       var draw = SVG('path').size('100%', '100%'),
           impact = SVG('impact').size('15', '15');
@@ -180,22 +213,28 @@ Template.game.voteCount = function () {
                              .radius( 7.5 )
                              .fill('#F07C86');
           
-          if ( y > vh) {
+          if ( inc < -1 ) {
             // alert( 'affected by gravity!' )
+            document.getElementById("GAME1").play();
+            $("#GAME1").addClass('active');
 
-          } else if ( y < vh ) {
+          } else if ( inc > 1 ) {
             // alert( 'defied gravity!' )
+            document.getElementById("GAME3").play();
+            $("#GAME3").addClass('active');
 
           } else {
             // alert('neutral')
+            document.getElementById("GAME2").play();
+            $("#GAME2").addClass('active');
 
           }
 
-          clearInterval(particleShoot)
+          clearInterval(particleShoot);
         }
-
-        console.log(vh/2);
-        y = ((Template.game.voteCount()*(-10))+vh);//Math.random()*300+100; //-50 - 0 - 50
+        inc = inc*1.006;
+        y = inc+vh
+        // y = ((Template.game.voteCount()*(-10))+vh);
         newPoint = [x,y];
         pointArr.push(newPoint);
         polyline = polyline.plot(pointArr);
