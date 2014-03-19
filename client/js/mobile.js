@@ -1,7 +1,6 @@
 Template.mobile.rendered = function() {
 
-  Session.set( "upId", Votes.findOne({voteType: 'up'})._id );
-  Session.set( "downId", Votes.findOne({voteType: 'down'})._id );
+
   //make "Constants"
   var UP = 1,
       DOWN = -1,
@@ -11,6 +10,8 @@ Template.mobile.rendered = function() {
   // var beginButtonPushed = false
 
   Session.set("myVote", NOT_SET);
+  Session.set( "upId", Votes.findOne({voteType: 'up'})._id );
+  Session.set( "downId", Votes.findOne({voteType: 'down'})._id );
 
 
   //Database collections
@@ -63,7 +64,7 @@ Template.mobile.rendered = function() {
       console.log("NOT_SET")
       dbChangeVotes(Session.get("upId"), 1);
       Session.set("myVote", UP);
-      // outputDebugging();
+      outputDebugging();
       return
     }
 
@@ -73,7 +74,7 @@ Template.mobile.rendered = function() {
       Session.set("myVote", UP);
       dbChangeVotes(Session.get("upId"), 1);
       dbChangeVotes(Session.get("downId"), -1);
-      // outputDebugging();
+      outputDebugging();
     }
   }
 
@@ -84,7 +85,7 @@ Template.mobile.rendered = function() {
       console.log("NOT_SET")
       dbChangeVotes(Session.get("downId"), 1);
       Session.set("myVote", DOWN);
-      // outputDebugging();
+      outputDebugging();
       return
     }
 
@@ -94,7 +95,7 @@ Template.mobile.rendered = function() {
       Session.set("myVote", DOWN);
       dbChangeVotes(Session.get("downId"), 1);
       dbChangeVotes(Session.get("upId"), -1);
-      // outputDebugging();
+      outputDebugging();
     }
   }
 
@@ -133,9 +134,7 @@ Template.mobile.rendered = function() {
 
   function outputDebugging() {
     $(".orientation").html(
-        "Your vote = " + Session.get("myVote") + 
-        " Total: Up = " + Votes.findOne({voteType: "up"}).amount 
-        + ", Down = " + Votes.findOne({voteType: "down"}).amount);
+        "Your vote = " + Session.get("myVote") + " " + Session.get('upId') + " " + Session.get('downId'));
   }
 }
 

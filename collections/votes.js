@@ -11,15 +11,16 @@ if(Meteor.isServer) {
     for (var i = 0; i < voteTypes.length; i++) {
       Votes.insert({voteType: voteTypes[i], amount: 0});
     }
-  } else {
-  	Votes.update(
-    {_id: Votes.findOne({voteType: 'up'})._id}, 
-    {$set: {amount: 0}});
+  }
+ //  } else {
+ //  	Votes.update(
+ //    {_id: Votes.findOne({voteType: 'up'})._id}, 
+ //    {$set: {amount: 0}});
 
-  	Votes.update(
-  	{_id: Votes.findOne({voteType: 'down'})._id}, 
-    {$set: {amount: 0}});
-	}
+ //  	Votes.update(
+ //  	{_id: Votes.findOne({voteType: 'down'})._id}, 
+ //    {$set: {amount: 0}});
+	// }
 }
 
 // if(Meteor.isClient && Votes.findOne() ) {

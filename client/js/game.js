@@ -121,17 +121,17 @@ Template.game.rendered = function() {
 
 }
 
-Template.game.resetVotes = function () {
-    if (Votes.findOne()) {
-      Votes.update(
-        {_id: Session.get('upId')}, 
-        {$set: {amount: 0}});
+// Template.game.resetVotes = function () {
+//     if (Votes.findOne()) {
+//       Votes.update(
+//         {_id: Session.get('upId')}, 
+//         {$set: {amount: 0}});
 
-      Votes.update(
-        {_id: Session.get('down')}, 
-        {$set: {amount: 0}});
-    }
-};
+//       Votes.update(
+//         {_id: Session.get('down')}, 
+//         {$set: {amount: 0}});
+//     }
+// };
 
 Template.game.runExperiment = function () {
   //get the current vote count
@@ -175,7 +175,7 @@ Template.game.voteCount = function () {
       var particleShoot = setInterval(function(){
         // console.log(Template.game.voteCount());
         if ( x >= foil ) {
-          $('#impact').css({top: y, left: x-7.5});
+          $('#impact').css({top: y-7.5, left: x-7.5});
           var impactPoint = impact.rect( 15, 15 )
                              .radius( 7.5 )
                              .fill('#F07C86');
@@ -195,7 +195,7 @@ Template.game.voteCount = function () {
         }
 
         console.log(vh/2);
-        y = Math.random()*300+vh/2;//Math.random()*300+100; //-50 - 0 - 50
+        y = ((Template.game.voteCount()*(-10))+vh);//Math.random()*300+100; //-50 - 0 - 50
         newPoint = [x,y];
         pointArr.push(newPoint);
         polyline = polyline.plot(pointArr);
