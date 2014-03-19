@@ -1,34 +1,46 @@
+
+
+  // Meteor.startup(function () {
+  // if (Session.get('data_loaded', true)) {
+  //   Template.game.resetVotes();
+  // }
+  //  }); 
+
+
 if ( Meteor.isClient ) {
     Votes = new Meteor.Collection("votes");
 
-    Deps.autorun(function() {
-      Meteor.subscribe('votes');
-      console.log('There are ' + Votes.find().count() + ' posts');
+    // Deps.autorun(function() {
+      // Meteor.subscribe('votes');
+      // console.log('There are ' + Votes.find().count() + ' posts');
 
+    
+      // Template.game.users = function() {
+      //     return Votes.findOne({voteType: "up"}).amount + Votes.findOne({voteType: "down"}).amount;
+      // }
 
-      Template.game.users = function() {
-        if (Votes.findOne()) {
-          var numUsers = Votes.findOne({voteType: "up"}).amount + Votes.findOne({voteType: "down"}).amount;
-          console.log("numUsers = " + numUsers);
-          return numUsers;
-        }
-      }
-
-      Template.game.voteCount = function() {
-        if (Votes.findOne()) {
-          var numUpVotes = Votes.findOne({voteType: "up"}).amount,
-              numDownVotes = Votes.findOne({voteType: "down"}).amount
-
-          console.log("numUpVotes = " + numUpVotes);
-          console.log("numDownVotes = " + numDownVotes);
-          return numUpVotes - numDownVotes;
-        }
-      }
-    });
+      // Template.game.voteCount = function() {
+      //     return Votes.findOne({voteType: "up"}).amount - Votes.findOne({voteType: "down"}).amount;
+      // }
+    // }); //END Deps.autorun(function() {
 }
 
 
 Template.game.rendered = function() {
+
+
+  Session.set( "upId", Votes.findOne({voteType: 'up'})._id );
+  Session.set( "downId", Votes.findOne({voteType: 'down'})._id );
+
+  // Template.game.users = function() {
+  //   return Votes.findOne({_id: Session.get('upId')}).amount;
+  // }
+
+  // Template.game.voteCount = function() {
+  //   return Votes.findOne({_id: Session.get('upId')}).amount - Votes.findOne({_id: Session.get('downId')}).amount;
+  // }
+
+
 
 
   // reminder: database has the schema...
@@ -50,9 +62,9 @@ Template.game.rendered = function() {
   // });
 
 
-  if (Session.get('data_loaded', true)) {
-    resetVotes();
-  }
+
+  // Template.game.resetVotes();
+
 
 
   //
@@ -67,27 +79,15 @@ Template.game.rendered = function() {
   // ============
   // sets the "amount" of both upvotes and downvotes to 0
   //
-  function resetVotes() {
-    var voteTypes = ["up", "down"];
-    for (var i = 0; i < voteTypes.length; i++){
-      Votes.update(
-        {_id: Votes.findOne({voteType: voteTypes[i]})._id}, 
-        {$set: {amount: 0}});
-    }
-  }
+  // function resetVotes() {
+  //   var voteTypes = ["up", "down"];
+  //   for (var i = 0; i < voteTypes.length; i++){
+  //     Votes.update(
+  //       {_id: Votes.findOne({voteType: voteTypes[i]})._id}, 
+  //       {$set: {amount: 0}});
+  //   }
+  // }
 
-  //
-  // Template.game.users
-  // ===================
-  // returns the current number of users that have cast their vote
-  //
-  Template.game.users = function() {
-    //NOTE: there's a weird error here where if you visit the page
-    //directly, it'll give an error saying that the Votes.findOne each
-    //return undefined.  But if you refresh the page, it'll load
-    //everything just fine.  Not sure why.
-      
-  }
 
   //
   // Template.game.upVotes
@@ -121,6 +121,18 @@ Template.game.rendered = function() {
 
 }
 
+Template.game.resetVotes = function () {
+    if (Votes.findOne()) {
+      Votes.update(
+        {_id: Session.get('upId')}, 
+        {$set: {amount: 0}});
+
+      Votes.update(
+        {_id: Session.get('down')}, 
+        {$set: {amount: 0}});
+    }
+};
+
 Template.game.runExperiment = function () {
   //get the current vote count
   var num = Math.random()*100-50; //-50 - 0 - 50
@@ -130,6 +142,14 @@ Template.game.runExperiment = function () {
   line.plot(50, 30, 100, 150)
 
 };
+
+Template.game.users = function () {
+  return Votes.findOne({voteType: 'up'}).amount + Votes.findOne({voteType: 'down'}).amount;
+}
+
+Template.game.voteCount = function () {
+  return Votes.findOne({voteType: 'up'}).amount - Votes.findOne({voteType: 'down'}).amount;
+}
 
 
   Template.game.events = {

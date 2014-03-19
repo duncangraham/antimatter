@@ -1,5 +1,7 @@
 Template.mobile.rendered = function() {
 
+  Session.set( "upId", Votes.findOne({voteType: 'up'})._id );
+  Session.set( "downId", Votes.findOne({voteType: 'down'})._id );
   //make "Constants"
   var UP = 1,
       DOWN = -1,
@@ -9,7 +11,6 @@ Template.mobile.rendered = function() {
   // var beginButtonPushed = false
 
   Session.set("myVote", NOT_SET);
-  console.log("Current Vote = " + NOT_SET);
 
 
   //Database collections
@@ -59,18 +60,20 @@ Template.mobile.rendered = function() {
   function voteUp(){
     // If there was no previous vote, make "up"+1
     if (Session.get("myVote") == NOT_SET) {
-      dbChangeVotes("up", 1);
+      console.log("NOT_SET")
+      dbChangeVotes(Session.get("upId"), 1);
       Session.set("myVote", UP);
-      outputDebugging();
+      // outputDebugging();
       return
     }
 
     // If previous vote was "down", make "up"+1 and "down"-1
     if (Session.get("myVote") == DOWN) {
+      console.log("DOWN")
       Session.set("myVote", UP);
-      dbChangeVotes("up", 1);
-      dbChangeVotes("down", -1);
-      outputDebugging();
+      dbChangeVotes(Session.get("upId"), 1);
+      dbChangeVotes(Session.get("downId"), -1);
+      // outputDebugging();
     }
   }
 
@@ -78,27 +81,30 @@ Template.mobile.rendered = function() {
   function voteDown(){
     // If there was no previous vote, make "down"+1
     if (Session.get("myVote") == NOT_SET) {
-      dbChangeVotes("down", 1);
+      console.log("NOT_SET")
+      dbChangeVotes(Session.get("downId"), 1);
       Session.set("myVote", DOWN);
-      outputDebugging();
+      // outputDebugging();
       return
     }
 
     // If previous vote was "up", make "down"+1 and "up"-1
     if (Session.get("myVote") == UP) {
+      console.log("UP")
       Session.set("myVote", DOWN);
-      dbChangeVotes("down", 1);
-      dbChangeVotes("up", -1);
-      outputDebugging();
+      dbChangeVotes(Session.get("downId"), 1);
+      dbChangeVotes(Session.get("upId"), -1);
+      // outputDebugging();
     }
   }
 
 
   function dbChangeVotes( direction, changeBy ){
+    console.log(Votes.find().fetch());
     Votes.update(
-      {_id: Votes.findOne({voteType: direction})._id}, 
+      {_id: direction}, 
       {$inc: {amount: changeBy}});
-  }
+    }
 
 
   //Template functions
