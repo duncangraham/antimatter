@@ -1,9 +1,20 @@
 <template name="implications">
 	{{> nav}}
 
-	<div class="w100 h100">
-    <p>The AEgIS experiment needs your help pushing humanity to the next level</p>
-    <p>You can follow the experiment and take part on <a href="#">crowdcrafting.org</a></p>
-	</div>
+
+	<video preload="auto" id="implicationsVid" class="bgvid-opaque w100 center" tabindex="0">
+		<!-- <source src="implications.mebm" type="video/webm"> -->
+
+    <!-- Uncomment this after debugging -->
+		<source src="implications.mp4" type="video/mp4">
+	</video>
+
+  <a href="http://crowdcrafting.org/app/antimatter/">
+    <div class="crowdcrafting-button bottom-center pb1 w25 btn btn-transparent text-center tk-open-sans">
+        Take part in the AEgIS experiment
+    </div>
+  </a>
+
+  <img src="play-button.png" class="play-button h10 bottom-left" />
 
 </template>
