@@ -64,7 +64,7 @@ Template.mobile.rendered = function() {
       console.log("NOT_SET")
       dbChangeVotes(Session.get("upId"), 1);
       Session.set("myVote", UP);
-      outputDebugging();
+      // outputDebugging();
       return
     }
 
@@ -74,7 +74,7 @@ Template.mobile.rendered = function() {
       Session.set("myVote", UP);
       dbChangeVotes(Session.get("upId"), 1);
       dbChangeVotes(Session.get("downId"), -1);
-      outputDebugging();
+      // outputDebugging();
     }
   }
 
@@ -85,7 +85,7 @@ Template.mobile.rendered = function() {
       console.log("NOT_SET")
       dbChangeVotes(Session.get("downId"), 1);
       Session.set("myVote", DOWN);
-      outputDebugging();
+      // outputDebugging();
       return
     }
 
@@ -95,7 +95,7 @@ Template.mobile.rendered = function() {
       Session.set("myVote", DOWN);
       dbChangeVotes(Session.get("downId"), 1);
       dbChangeVotes(Session.get("upId"), -1);
-      outputDebugging();
+      // outputDebugging();
     }
   }
 
