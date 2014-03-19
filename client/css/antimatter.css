@@ -81,7 +81,11 @@ a {
 }
 
 .h33 {
-	height:33.33%;
+	height: 33.33%;
+}
+
+.h10 {
+	height: 10%;
 }
 
 .h1 {
@@ -325,6 +329,12 @@ height: 100%;
 	position: absolute;
 	bottom: 0em;
 	left:50%;
+}
+
+.bottom-left {
+	position: absolute;
+	bottom: 1em;
+	left: 1em;
 }
 
 #matter {
