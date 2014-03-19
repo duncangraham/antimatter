@@ -389,7 +389,7 @@ height: 100%;
 }
 
 
-.btn:after {
+./*btn:after {
 	content: '';
 	position: absolute;
 	width: 0%;
@@ -405,7 +405,7 @@ height: 100%;
 .btn:hover:after, .btn:active:after {
 width: 100%;
 }
-
+*/
 .btn-transparent {
 	border: 1px solid #FFF;
 	color:#FFF;

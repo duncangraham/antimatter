@@ -15,7 +15,5 @@ Template.implications.events = {
 }
 
 Template.implications.rendered = function() {
-  var implicationsVid = document.getElementById("implicationsVid");
-
-  implicationsVid.play()
+  document.getElementById("IMPLICATIONS").play()
 }
