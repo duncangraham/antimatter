@@ -3,7 +3,7 @@ if ( Meteor.isClient ) {
 
     Deps.autorun(function() {
       Meteor.subscribe('votes');
-      console.log('There are ' + Votes.find().count() + ' posts');
+      // console.log('There are ' + Votes.find().count() + ' posts');
 
 
       Template.game.users = function() {
