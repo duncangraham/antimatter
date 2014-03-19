@@ -1,7 +1,7 @@
 if ( Meteor.isClient ) {
     // Votes = new Meteor.Collection("votes");
 
-    Deps.autorun(function() {
+    // Deps.autorun(function() {
       // Meteor.subscribe('votes');
       // console.log('There are ' + Votes.find().count() + ' posts');
 
@@ -24,7 +24,7 @@ if ( Meteor.isClient ) {
           return numUpVotes - numDownVotes;
         }
       }
-    });
+    // }); //END Deps.autorun(function() {
 }
 
 
