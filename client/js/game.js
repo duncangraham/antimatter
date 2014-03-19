@@ -88,18 +88,6 @@ Template.game.rendered = function() {
   //   }
   // }
 
-  //
-  // Template.game.users
-  // ===================
-  // returns the current number of users that have cast their vote
-  //
-  Template.game.users = function() {
-    //NOTE: there's a weird error here where if you visit the page
-    //directly, it'll give an error saying that the Votes.findOne each
-    //return undefined.  But if you refresh the page, it'll load
-    //everything just fine.  Not sure why.
-      
-  }
 
   //
   // Template.game.upVotes
