@@ -2,7 +2,7 @@ if ( Meteor.isClient ) {
     Votes = new Meteor.Collection("votes");
 
     Deps.autorun(function() {
-      Meteor.subscribe('votes');
+      // Meteor.subscribe('votes');
       // console.log('There are ' + Votes.find().count() + ' posts');
 
 
