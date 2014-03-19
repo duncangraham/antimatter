@@ -1,22 +1,38 @@
 <template name="implications">
-	{{> nav}}
+  {{> nav}}
+
+<div class="h100 w100" style="z-index: 100; position: relative">
+  <a href="http://crowdcrafting.org/app/antimatter/" class="btn tk-open-sans uppercase bottom-center w25 text-center btn-dark" style="margin-left:-12.5%; bottom: 2em; z-index:1000">Take part in the AEgIS experiment</a>
+</div>
+
+  <video preload="auto" loop id="IMPLICATIONS" class="top-left w100" tabindex="0" style="z-index:-1">
+    <source src="IMPLICATIONS.webm" type="video/webm">
+    <source src="IMPLICATIONS.mp4" type="video/mp4">
+  </video>
+
 
 
 <!-- 	<video preload="auto" autoplay id="implicationsVid" class="bgvid-opaque w100 center">
 		<source src="implications.webm" type="video/webm">
 
 		<source src="implications.mp4" type="video/mp4">
-	</video> -->
+	</video>
 
 
 
- <video preload="auto" id="IMPLICATIONS" class="bgvid w100 center" tabindex="0" poster="IMPLICATIONS.jpg">
+ <video preload="auto" id="IMPLICATIONS" class="bgvid w100 center z-1" tabindex="0" poster="IMPLICATIONS.jpg">
     <source src="IMPLICATIONS.webm" type="video/webm">
     <source src="IMPLICATIONS.mp4" type="video/mp4">
   </video>
 
 
-    <div class="crowdcrafting-button bottom-center pb1 w25 btn btn-transparent text-center tk-open-sans">
-       <a href="http://crowdcrafting.org/app/antimatter/" class="h100 w100"> Take part in the AEgIS experiment</a>
+    <div class="crowdcrafting-button bottom-center pb1 w25">
+       <a href="http://crowdcrafting.org/app/antimatter/" class="btn btn-dark text-center tk-open-sans"> Take part in the AEgIS experiment</a>
     </div>
+
+<div class="w100 h100 ztop" style="position: relative">
+    <div class="bottom-center ztop pb1" style="margin-left:-12.5%;">
+      <a href="http://crowdcrafting.org/app/antimatter/" class="btn run tk-open-sans uppercase center w100 text-center btn-dark origins" style="">Take part in the AEgIS experiment</a>
+    </div>
+</div> -->
 </template>

@@ -369,7 +369,6 @@ height: 100%;
 	left: 50%;
 	top: 4em;
 	margin-left: -22.5px;
-	z-index: -1;
 }
 
 #hydrogenAtom {
@@ -465,15 +464,15 @@ width: 100%;
 }
 
 video.bgvid {
-position: fixed;
-right: 0;
-top: 0;
+	position: fixed;
+	top: 0;
+	left:0;
 background-size: cover;
 }
-/*
+
 video.bgvid#particleVid {
-	z-index: 1;
-}*/
+	z-index: -10;
+}
 
 video.bgvid#matterVid {
 	z-index: 1;

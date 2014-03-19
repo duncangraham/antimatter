@@ -13,7 +13,34 @@ Template.game.rendered = function() {
 
   middleVid.css('margin-top', -ml);
 
+
+  var foil = window.innerWidth*.75;
+  var vh = window.innerHeight*.5;
+  var inc = -1;
+
+      // var trajectory = Math.floor(Math.random() * 6)-3;
+
+      // console.log(trajectory);
+
+      // if( trajectory == 2 || trajectory == 1 ) {
+      //   var inc = 1;
+      // } else if( trajectory == -3 || trajectory == -2 ) {
+      //   var inc = -1;
+      // } else {
+      //   var inc = 0;
+      // }
+
 }
+
+Template.game.foil = function () {
+  return window.innerWidth*.75;
+}
+
+Template.game.vh = function () {
+  return window.innerHeight*.5;
+}
+
+Session.set('inc', -1);
 
 // Template.game.users = function () {
 //   return Votes.findOne({voteType: 'up'}).amount + Votes.findOne({voteType: 'down'}).amount;
@@ -58,21 +85,14 @@ Template.game.events = {
     // },
 
     'click .run': function() {
-      var foil = window.innerWidth*.75;
-      var vh = window.innerHeight*.5;
+      clearInterval(particleShoot);
+      $('#path svg, #impact svg').remove();
 
-      var trajectory = Math.floor(Math.random() * 6)-3;
+      var foil = Template.game.foil();
+      var vh = Template.game.vh();
+      var inc = Session.get('inc');
 
-      console.log(trajectory);
-
-      if( trajectory == 2 || trajectory == 1 ) {
-        var inc = 1;
-      } else if( trajectory == -3 || trajectory == -2 ) {
-        var inc = -1;
-      } else {
-        var inc = 0;
-      }
-
+      
       var draw = SVG('path').size('100%', '100%'),
           impact = SVG('impact').size('15', '15');
       var x = 0,
@@ -109,6 +129,8 @@ Template.game.events = {
           }
 
           clearInterval(particleShoot);
+          var i = Session.get('inc');
+          Session.set('inc', i+1);
         }
         inc = inc*1.006;
         y = inc+vh

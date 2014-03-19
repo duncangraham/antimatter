@@ -8,10 +8,5 @@ video.bgvid-opaque {
 }
 
 .crowdcrafting-button {
-  /* background-color: #26c9ff; */
-  text-align: center;
-  margin-top: 20em;
-  margin-bottom: 6em;
   margin-left: -180px;
-  width: 27%;
 }
