@@ -276,6 +276,12 @@ height: 100%;
 	transition: all .3s;
 }
 
+ @media screen and (max-width: 720px) {
+  body {
+		font-size: .8em;
+	}
+ }
+
 .nav.active {
 	opacity: 1;
 }
@@ -305,13 +311,13 @@ height: 100%;
 /*  */
 
 .tag {
-	margin: 1em;
+	margin: 2.5%;
 	font-size:1.2em;
 }
 
 .logo {
 	width: 50%;
-	padding-top:10em;
+	padding-top:20%;
 }
 
 #hydrogen {
