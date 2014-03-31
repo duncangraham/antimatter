@@ -1,14 +1,13 @@
 Meteor.startup(function () {
-	//populate DB if it's empty
+	//Reset database when meteor is started up
   if(Meteor.isServer) {
 	  Votes = new Meteor.Collection('votes');
 	  
-	  if (Votes.find().count() == 0) {
-  	  var voteTypes = ["up", "down"];
+    Votes.remove({});
+  	var voteTypes = ["up", "down"];
 
-      for (var i = 0; i < voteTypes.length; i++) {
-        Votes.insert({voteType: voteTypes[i], amount: 0});
-      }
+    for (var i = 0; i < voteTypes.length; i++) {
+      Votes.insert({voteType: voteTypes[i], amount: 0});
     }
    //  } else {
    //  	Votes.update(
