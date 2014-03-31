@@ -37,24 +37,19 @@ Session.set( "downId", null );
 //
 //==================================================================
 Template.mobile.rendered = function() {
+  //TODO: test if tilting actually works or not now that the lock is in
+  //place
+  if (window.DeviceOrientationEvent) {
+    console.log("Tilting is supported on this device");
 
-
-  // var beginButtonPushed = false
-
-  //Capture device orientation
-  // TODO: uncomment this after debugging
-  // if (window.DeviceOrientationEvent) {
-  //
-  //   // Listen for the event and handle DeviceOrientationEvent object
-  //   window.addEventListener('deviceorientation', 
-  //                           // handleTilting, 
-  //                           tiltDebugging,
-  //                           false);
-  // }
-  // else {
-  //   $(".orientation").html("Sorry, your device doesn't have tilt " +
-  //     "recognition");
-  // }
+    // Listen for the event and handle DeviceOrientationEvent object
+    window.addEventListener('deviceorientation', 
+                            handleTilting, 
+                            false);
+  }
+  else {
+    console.log("Sorry, your device doesn't have tilt recognition");
+  }
 
   //for now, make the voting binary.  Only up or down
   function handleTilting(eventData){
@@ -98,6 +93,17 @@ Template.mobile.helpers({
       var downVotes = Votes.findOne({voteType: "down"}).amount;
 
       return upVotes - downVotes;
+    }
+  },
+
+  myVote: function () {
+    var vote = Session.get('myVote');
+    if (vote === UP){
+      return "up";
+    } else if (vote === DOWN) {
+      return "down";
+    } else if (vote === NOT_SET) {
+      return "undecided";
     }
   }
 });
