@@ -61,10 +61,21 @@ Template.mobile.rendered = function() {
 
 //Template functions
 //TODO: might consider wrapping Template.mobile.votes in
-//a Template.post_edit.helpers({}) block
-Template.mobile.votes = function () {
-  return Votes.find();
-};
+//a Template.mobile.helpers({}) block
+Template.mobile.helpers({
+  votes: function () {
+    return Votes.find();
+  },
+
+  voteTally: function() {
+    if (Votes.findOne() !== undefined ){
+      var upVotes = Votes.findOne({voteType: "up"}).amount;
+      var downVotes = Votes.findOne({voteType: "down"}).amount;
+
+      return upVotes - downVotes;
+    }
+  }
+});
 
 Template.mobile.events = {
   'click #vote-up': function(e) {
@@ -101,7 +112,7 @@ function voteUp(){
     console.log("previous vote was DOWN")
     Session.set("myVote", UP);
     dbChangeVotes(upID, 1);
-    dbChangeVotes(Session.get("downID"), -1);
+    dbChangeVotes(downID, -1);
     // outputDebugging();
   }
 
