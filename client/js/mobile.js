@@ -1,21 +1,41 @@
-//make "Constants"
-var UP = 1,
-    DOWN = -1,
-    NOT_SET = 0;
-
-//Database collections
+//==================================================================
+//
+//  Database Schema
+//
+//==================================================================
 //    database has the schema:
 //      voteType:     amount:
 //      "up"          3
 //      "down"        7
 
-// while( Votes.findOne() === undefined ){
-//   //wait till the db is ready
-// }
+//==================================================================
+//
+//  Constants
+//
+//==================================================================
+//make "Constants"
+var UP = 1,
+    DOWN = -1,
+    NOT_SET = 0;
+
+//==================================================================
+//
+//  Session Variables
+//
+//==================================================================
 Session.set("myVote", NOT_SET);
+Session.set( "dbReady", false ); //Will remain false until the database is loaded
+Session.set( "upId", null );
+Session.set( "downId", null );
 // Session.set( "upId", Votes.findOne({voteType: 'up'})._id );
 // Session.set( "downId", Votes.findOne({voteType: 'down'})._id );
 
+
+//==================================================================
+//
+//  Functions to be loaded when page is finished rendering
+//
+//==================================================================
 Template.mobile.rendered = function() {
 
 
@@ -38,6 +58,7 @@ Template.mobile.rendered = function() {
 
   //for now, make the voting binary.  Only up or down
   function handleTilting(eventData){
+    if( Session.get("dbReady") !== false ){
       var b = eventData.beta,
           voteChoice = document.getElementById('voteChoice');
 
@@ -56,12 +77,15 @@ Template.mobile.rendered = function() {
       else {
         voteDown();// submit a vote of "down"
       }
+    }
   }
 }
 
-//Template functions
-//TODO: might consider wrapping Template.mobile.votes in
-//a Template.mobile.helpers({}) block
+//==================================================================
+//
+//  Template helper functions
+//
+//==================================================================
 Template.mobile.helpers({
   votes: function () {
     return Votes.find();
@@ -69,6 +93,7 @@ Template.mobile.helpers({
 
   voteTally: function() {
     if (Votes.findOne() !== undefined ){
+      Session.set("dbReady", true);
       var upVotes = Votes.findOne({voteType: "up"}).amount;
       var downVotes = Votes.findOne({voteType: "down"}).amount;
 
@@ -77,6 +102,12 @@ Template.mobile.helpers({
   }
 });
 
+
+//==================================================================
+//
+//  Template events
+//
+//==================================================================
 Template.mobile.events = {
   'click #vote-up': function(e) {
     voteUp();
@@ -89,6 +120,12 @@ Template.mobile.events = {
   }
 }
 
+
+//==================================================================
+//
+//  Regular functions
+//
+//==================================================================
 function voteUp(){
   var upID = Votes.findOne({voteType: 'up'})._id,
       downID = Votes.findOne({voteType: 'down'})._id
@@ -103,8 +140,6 @@ function voteUp(){
     console.log("previous vote was NOT_SET")
     dbChangeVotes(upID, 1);
     Session.set("myVote", UP);
-    // outputDebugging();
-    // return
   }
 
   // If previous vote was "down", make "up"+1 and "down"-1
@@ -113,7 +148,6 @@ function voteUp(){
     Session.set("myVote", UP);
     dbChangeVotes(upID, 1);
     dbChangeVotes(downID, -1);
-    // outputDebugging();
   }
 
   //debugging output
