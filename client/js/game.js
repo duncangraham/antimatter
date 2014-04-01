@@ -18,6 +18,11 @@
 //                    addPoint() function has plotted.  Used to make
 //                    sure addPoint() doesn't keep running till infinity
 //                    continuing to plot points
+// graphPoints      = the actual place where the vote count is stored.
+//                    Each element in the array represents one second,
+//                    starting at element 0 and moving onward.  Each
+//                    second, addPoint() will append the most current vote
+//                    Count to the end of this array.
 Session.set('inc', -1);
 Session.set( "dbReady", false );
 Session.set( "maxPoints", 30 );
