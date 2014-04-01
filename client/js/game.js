@@ -20,7 +20,7 @@
 //                    continuing to plot points
 Session.set('inc', -1);
 Session.set( "dbReady", false );
-Session.set( "maxPoints", 5 );
+Session.set( "maxPoints", 30 );
 Session.set( "numPoints", 0 );
 Session.set( "graphPoints", [] );
 // Session.set( "upId", Votes.findOne({voteType: 'up'})._id );
