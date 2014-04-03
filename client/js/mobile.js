@@ -59,10 +59,6 @@ BLUE = 0;
 //==================================================================
 Session.set("myVote", NOT_SET);
 Session.set( "dbReady", false ); //Will remain false until the database is loaded
-Session.set( "upId", null );
-Session.set( "downId", null );
-// Session.set( "upId", Votes.findOne({voteType: 'up'})._id );
-// Session.set( "downId", Votes.findOne({voteType: 'down'})._id );
 
 
 //==================================================================
@@ -254,33 +250,7 @@ function vote(voteInput) {
   }
 }
 
-function dbChangeVotes( direction, changeBy ){
-  Votes.update(
-    {_id: direction}, 
-    {$inc: {amount: changeBy}});
-}
-
-
 //Debugging functions
 function outputDebugging() {
   console.log("Your vote = " + Session.get("myVote"));
 }
-
-
-// We aren't going to try to wipe the user's vote when they close the
-// browser anymore.  We're going to make the db wipe
-// when the "game" page is loaded.  We're going to make it unable to
-// access the page without a username and password
-//
-// // remove this user's vote from the DB when they close the mobile page
-// //SCARY WARNING!!! THIS IS UNTESTED AS OF YET.  PROCEED WITH CAUTION!
-// window.onbeforeunload = function() {
-//   if (Session.get("myVote") == DOWN) {
-//     dbChangeVotes( "down", -1 );
-//   }
-//   else if (Session.get("myVote") == UP) {
-//     dbChangeVotes( "up", -1 );
-//   }
-// }
-//
-
