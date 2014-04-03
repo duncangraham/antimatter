@@ -43,6 +43,11 @@ SERVER_COLOR = RED;
 FLIP_INTERVAL = 2000;
 FIRST_RUN = true;
 
+//==================================================================
+//
+//  The actual code
+//
+//==================================================================
 Meteor.setInterval( function (){ changeColor() }, FLIP_INTERVAL);
 
 function changeColor() {
@@ -60,7 +65,4 @@ function changeColor() {
   Votes.remove({color: SERVER_COLOR});
 
   Votes.update({tag: {$exists: true}}, {$set: {color: SERVER_COLOR}});
-}
-function clearDB() {
-  Votes.remove({user: {$exists: true}}); 
 }
