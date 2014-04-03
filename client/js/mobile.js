@@ -13,14 +13,9 @@
 //  Global Variables
 //
 //==================================================================
-// UP               = used to tell the dbChangeVotes() function to change
-//                    the upvotes column of the Votes collection. Also
-//                    used to tell what the user's current vote is so that
-//                    he or she doesn't submit more than one vote
-// DOWN             = used to tell the dbChangeVotes() function to change
-//                    the downvotes column of the Votes collection. Also
-//                    used to tell what the user's current vote is so that
-//                    he or she doesn't submit more than one vote
+// UP               = used to mark whether the user has a vote of up or
+//                    down
+// DOWN             = same as with UP
 // NOT_SET          = the session variable myVote will be set to NOT_SET
 //                    at page laod to show that the user hasn't yet
 //                    submitted a vote
