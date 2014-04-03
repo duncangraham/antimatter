@@ -65,28 +65,6 @@ Session.set( "downId", null );
 // Session.set( "downId", Votes.findOne({voteType: 'down'})._id );
 
 
-
-// Meteor.startup(function(){
-//     console.log('------------------------------------------------');
-//
-//     $(window).bind('beforeunload', function() {
-//         closingWindow();
-//
-//         alert("you're closing the window");
-//         // have to return null, unless you want a chrome popup alert
-//         return null;
-//
-//         // have to return null, unless you want a chrome popup alert
-//         // return 'Are you sure you want to leave your Vonvo?';
-//     });
-// });
-// closingWindow = function(){
-//   alert("you're closing the window");
-//   console.log('closingWindow');
-//   var dbID = Votes.findOne({user: MY_USER_ID})._id;
-//   console.log('dbID = ' + dbID);
-//   Votes.remove( {_id: dbID} );
-// }
 //==================================================================
 //
 //  Functions to be loaded when page is finished rendering
@@ -275,105 +253,6 @@ function vote(voteInput) {
     Session.set("myVote", voteInput);
   }
 }
-// function vote(voteInput) {
-//   console.log("vote called");
-//   //Return automatically if the database isn't ready yet
-//   if (!Session.get("dbReady")) {
-//     return;
-//   }
-//
-//   //register the user and input vote if the user doesn't exist in DB
-//   if (!REGISTERED) {
-//     initialUserRegistration(UP);
-//     Session.set("myVote", voteInput);
-//     return;
-//   }
-//
-//   mySavedVote = getUserVote( MY_USER_ID );
-//
-//   //If user exists, but the vote was deleted by server, re-insert it
-//   if (!mySavedVote) {
-//     Votes.insert( {user: MY_USER_ID, vote: voteInput} );
-//     return;
-//   }
-//
-//   //If user and vote exist, update the vote with the user's input
-//   if (voteInput != Session.get("myVote")) {
-//     console.log("user and vote exist, updating vote to " + voteInput);
-//     var dbID = Votes.findOne({user: MY_USER_ID})._id;
-//     Votes.update( {_id: dbID}, {$set: {vote: voteInput}} );
-//     Session.set("myVote", voteInput);
-//   }
-// }
-
-
-// function voteUp(){
-//   // var upID = Votes.findOne({voteType: 'up'})._id,
-//   //     downID = Votes.findOne({voteType: 'down'})._id;
-//
-//
-//   //debugging output
-//   var upVotes = Votes.findOne({voteType: "up"}).amount;
-//   var downVotes = Votes.findOne({voteType: "down"}).amount;
-//   console.log("total votes before yours was cast: Upvotes = " + upVotes
-//       + ", Downvotes = " + downVotes);
-//
-//   // If there was no previous vote, make "up"+1
-//   if (Session.get("myVote") == NOT_SET) {
-//     console.log("previous vote was NOT_SET")
-//     dbChangeVotes(upID, 1);
-//     Session.set("myVote", UP);
-//   }
-//
-//   // If previous vote was "down", make "up"+1 and "down"-1
-//   if (Session.get("myVote") == DOWN) {
-//     console.log("previous vote was DOWN")
-//     Session.set("myVote", UP);
-//     dbChangeVotes(upID, 1);
-//     dbChangeVotes(downID, -1);
-//   }
-//
-//   //debugging output
-//   upVotes = Votes.findOne({voteType: "up"}).amount
-//   downVotes = Votes.findOne({voteType: "down"}).amount
-//   console.log("total votes after yours was cast: Upvotes = " + upVotes
-//       + ", Downvotes = " + downVotes);
-// }
-
-
-// function voteDown(){
-//   var upID = Votes.findOne({voteType: 'up'})._id,
-//       downID = Votes.findOne({voteType: 'down'})._id
-//
-//   //debugging output
-//   var upVotes = Votes.findOne({voteType: "up"}).amount
-//   var downVotes = Votes.findOne({voteType: "down"}).amount
-//   console.log("total votes before yours was cast: Upvotes = " + upVotes + ", Downvotes = " + downVotes);
-//
-//   // If there was no previous vote, make "down"+1
-//   if (Session.get("myVote") == NOT_SET) {
-//     console.log("previous vote was NOT_SET")
-//     dbChangeVotes(downID, 1);
-//     Session.set("myVote", DOWN);
-//     // outputDebugging();
-//     // return
-//   }
-//
-//   // If previous vote was "up", make "down"+1 and "up"-1
-//   if (Session.get("myVote") == UP) {
-//     console.log("previous vote was UP")
-//     Session.set("myVote", DOWN);
-//     dbChangeVotes(downID, 1);
-//     dbChangeVotes(upID, -1);
-//     // outputDebugging();
-//   }
-//
-//   //debugging output
-//   upVotes = Votes.findOne({voteType: "up"}).amount
-//   downVotes = Votes.findOne({voteType: "down"}).amount
-//   console.log("total votes after yours was cast: Upvotes = " + upVotes + ", Downvotes = " + downVotes);
-// }
-
 
 function dbChangeVotes( direction, changeBy ){
   Votes.update(
