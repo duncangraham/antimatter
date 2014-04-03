@@ -10,13 +10,47 @@
 
 //==================================================================
 //
-//  Constants
+//  Global Variables
 //
 //==================================================================
-//make "Constants"
-var UP = 1,
-    DOWN = -1,
-    NOT_SET = 0;
+// UP               = used to tell the dbChangeVotes() function to change
+//                    the upvotes column of the Votes collection. Also
+//                    used to tell what the user's current vote is so that
+//                    he or she doesn't submit more than one vote
+// DOWN             = used to tell the dbChangeVotes() function to change
+//                    the downvotes column of the Votes collection. Also
+//                    used to tell what the user's current vote is so that
+//                    he or she doesn't submit more than one vote
+// NOT_SET          = the session variable myVote will be set to NOT_SET
+//                    at page laod to show that the user hasn't yet
+//                    submitted a vote
+UP = 1;
+DOWN = -1;
+NOT_SET = 0;
+
+// REGISTERED       = Initially false.  Will be false if the user hasn't
+//                    cast a vote yet and thus entered into the Users
+//                    collection. Becomes true when the user has been
+//                    registered for the very first time after page load
+//                    in the Users collection.
+// MY_USER_ID       = the ID for this current mobile user.  Set to null at
+//                    page load.  When the user first casts a vote, the
+//                    system will make a new row in the Users collection.
+//                    MY_USER_ID will be set to the database ID (row._id,
+//                    in other words). The 'User' column of the User
+//                    collection will also be filled in with this id.
+REGISTERED = false;
+MY_USER_ID = null;
+
+// MY_COLOR         = Used to track whether or not the mobile client has
+//                    the same color as the server. See documentation in
+//                    server/game.js for more details
+// RED              = See documentation in server/game.js
+// BLUE             = See documentation in server/game.js
+MY_COLOR = undefined;
+SERVER_COLOR = undefined;
+RED = 1;
+BLUE = 0;
 
 //==================================================================
 //
@@ -31,6 +65,28 @@ Session.set( "downId", null );
 // Session.set( "downId", Votes.findOne({voteType: 'down'})._id );
 
 
+
+// Meteor.startup(function(){
+//     console.log('------------------------------------------------');
+//
+//     $(window).bind('beforeunload', function() {
+//         closingWindow();
+//
+//         alert("you're closing the window");
+//         // have to return null, unless you want a chrome popup alert
+//         return null;
+//
+//         // have to return null, unless you want a chrome popup alert
+//         // return 'Are you sure you want to leave your Vonvo?';
+//     });
+// });
+// closingWindow = function(){
+//   alert("you're closing the window");
+//   console.log('closingWindow');
+//   var dbID = Votes.findOne({user: MY_USER_ID})._id;
+//   console.log('dbID = ' + dbID);
+//   Votes.remove( {_id: dbID} );
+// }
 //==================================================================
 //
 //  Functions to be loaded when page is finished rendering
@@ -39,17 +95,18 @@ Session.set( "downId", null );
 Template.mobile.rendered = function() {
   //TODO: test if tilting actually works or not now that the lock is in
   //place
-  if (window.DeviceOrientationEvent) {
-    console.log("Tilting is supported on this device");
-
-    // Listen for the event and handle DeviceOrientationEvent object
-    window.addEventListener('deviceorientation', 
-                            handleTilting, 
-                            false);
-  }
-  else {
-    console.log("Sorry, your device doesn't have tilt recognition");
-  }
+  //TODO: make a voting view for people who do not have tilting supported
+  // if (window.DeviceOrientationEvent) {
+  //   console.log("Tilting is supported on this device");
+  //
+  //   // Listen for the event and handle DeviceOrientationEvent object
+  //   window.addEventListener('deviceorientation', 
+  //                           handleTilting, 
+  //                           false);
+  // }
+  // else {
+  //   console.log("Sorry, your device doesn't have tilt recognition");
+  // }
 
   //for now, make the voting binary.  Only up or down
   function handleTilting(eventData){
@@ -67,10 +124,12 @@ Template.mobile.rendered = function() {
       }
 
       if (b>= 0){
-        voteUp(); // submit a vote of "up"
+        vote(UP);
+        // voteUp(); // submit a vote of "up"
       } 
       else {
-        voteDown();// submit a vote of "down"
+        vote(DOWN);
+        // voteDown();// submit a vote of "down"
       }
     }
   }
@@ -89,8 +148,21 @@ Template.mobile.helpers({
   voteTally: function() {
     if (Votes.findOne() !== undefined ){
       Session.set("dbReady", true);
-      var upVotes = Votes.findOne({voteType: "up"}).amount;
-      var downVotes = Votes.findOne({voteType: "down"}).amount;
+
+      SERVER_COLOR = Votes.findOne({tag: {$exists: true}}).color;
+
+      if (!REGISTERED) {
+        initialUserRegistration(Session.get("myVote"));
+      }
+
+      if (MY_COLOR !== SERVER_COLOR) {
+        vote(Session.get("myVote"));
+        // Votes.update({_id: MY_USER_ID}, {$set: {color: SERVER_COLOR}});
+        MY_COLOR = SERVER_COLOR;
+      } 
+
+      var upVotes = Votes.find({vote: UP}).count();
+      var downVotes = Votes.find({vote: DOWN}).count();
 
       return upVotes - downVotes;
     }
@@ -116,12 +188,12 @@ Template.mobile.helpers({
 //==================================================================
 Template.mobile.events = {
   'click #vote-up': function(e) {
-    voteUp();
+    vote(UP);
     outputDebugging();
   },
 
   'click #vote-down': function(e) {
-    voteDown();
+    vote(DOWN);
     outputDebugging();
   }
 }
@@ -132,69 +204,175 @@ Template.mobile.events = {
 //  Regular functions
 //
 //==================================================================
-function voteUp(){
-  var upID = Votes.findOne({voteType: 'up'})._id,
-      downID = Votes.findOne({voteType: 'down'})._id
-
-  //debugging output
-  var upVotes = Votes.findOne({voteType: "up"}).amount
-  var downVotes = Votes.findOne({voteType: "down"}).amount
-  console.log("total votes before yours was cast: Upvotes = " + upVotes + ", Downvotes = " + downVotes);
-
-  // If there was no previous vote, make "up"+1
-  if (Session.get("myVote") == NOT_SET) {
-    console.log("previous vote was NOT_SET")
-    dbChangeVotes(upID, 1);
-    Session.set("myVote", UP);
-  }
-
-  // If previous vote was "down", make "up"+1 and "down"-1
-  if (Session.get("myVote") == DOWN) {
-    console.log("previous vote was DOWN")
-    Session.set("myVote", UP);
-    dbChangeVotes(upID, 1);
-    dbChangeVotes(downID, -1);
-  }
-
-  //debugging output
-  upVotes = Votes.findOne({voteType: "up"}).amount
-  downVotes = Votes.findOne({voteType: "down"}).amount
-  console.log("total votes after yours was cast: Upvotes = " + upVotes + ", Downvotes = " + downVotes);
+function getUserVote(userID) {
+  //return row that has the user's ID
+  return Votes.findOne({user: userID});
 }
 
-
-function voteDown(){
-  var upID = Votes.findOne({voteType: 'up'})._id,
-      downID = Votes.findOne({voteType: 'down'})._id
-
-  //debugging output
-  var upVotes = Votes.findOne({voteType: "up"}).amount
-  var downVotes = Votes.findOne({voteType: "down"}).amount
-  console.log("total votes before yours was cast: Upvotes = " + upVotes + ", Downvotes = " + downVotes);
-
-  // If there was no previous vote, make "down"+1
-  if (Session.get("myVote") == NOT_SET) {
-    console.log("previous vote was NOT_SET")
-    dbChangeVotes(downID, 1);
-    Session.set("myVote", DOWN);
-    // outputDebugging();
-    // return
-  }
-
-  // If previous vote was "up", make "down"+1 and "up"-1
-  if (Session.get("myVote") == UP) {
-    console.log("previous vote was UP")
-    Session.set("myVote", DOWN);
-    dbChangeVotes(downID, 1);
-    dbChangeVotes(upID, -1);
-    // outputDebugging();
-  }
-
-  //debugging output
-  upVotes = Votes.findOne({voteType: "up"}).amount
-  downVotes = Votes.findOne({voteType: "down"}).amount
-  console.log("total votes after yours was cast: Upvotes = " + upVotes + ", Downvotes = " + downVotes);
+//------------------------------------------------------------------------
+// initialUserRegistration()
+//
+// Sets REGISTERED to true, inserts the user's vote into the database, and
+// sets MY_USER_ID to the inserted row's mongo id
+//
+// the inserted row will have the following information:
+//
+//    _id    |   user   |   vote
+// ----------+----------+----------
+// mongo_id  | mongo_id | voteInput
+//
+//------------------------------------------------------------------------
+function initialUserRegistration(voteInput) {
+  console.log("initialUserRegistration called");
+  dbID = Votes.insert({
+    user: undefined, 
+    vote: voteInput, 
+    color: SERVER_COLOR
+  });
+  Votes.update( {_id: dbID}, {$set: {user: dbID}} );
+  REGISTERED = true;
+  MY_USER_ID = dbID;
 }
+
+function vote(voteInput) {
+  console.log("vote called");
+  //Return automatically if the database isn't ready yet
+  if (!Session.get("dbReady")) {
+    return;
+  }
+
+  //register the user and input vote if the user doesn't exist in DB
+  if (!REGISTERED) {
+    initialUserRegistration(voteInput);
+    Session.set("myVote", voteInput);
+    return;
+  }
+
+  mySavedVote = getUserVote( MY_USER_ID );
+
+  //If user exists, but the vote was deleted by server, re-insert it
+  if (!mySavedVote) {
+    Votes.insert({
+      user: MY_USER_ID, 
+      vote: voteInput, 
+      color: SERVER_COLOR
+    });
+    return;
+  }
+
+  //If user and vote exist, update the vote with the user's input
+  if (voteInput != Session.get("myVote")) {
+    console.log("user and vote exist, updating vote to " + voteInput);
+    var dbID = Votes.findOne({user: MY_USER_ID})._id;
+    Votes.update( 
+        {_id: dbID}, 
+        {$set: {
+                vote: voteInput, 
+                color: SERVER_COLOR
+               }
+        }
+    );
+    Session.set("myVote", voteInput);
+  }
+}
+// function vote(voteInput) {
+//   console.log("vote called");
+//   //Return automatically if the database isn't ready yet
+//   if (!Session.get("dbReady")) {
+//     return;
+//   }
+//
+//   //register the user and input vote if the user doesn't exist in DB
+//   if (!REGISTERED) {
+//     initialUserRegistration(UP);
+//     Session.set("myVote", voteInput);
+//     return;
+//   }
+//
+//   mySavedVote = getUserVote( MY_USER_ID );
+//
+//   //If user exists, but the vote was deleted by server, re-insert it
+//   if (!mySavedVote) {
+//     Votes.insert( {user: MY_USER_ID, vote: voteInput} );
+//     return;
+//   }
+//
+//   //If user and vote exist, update the vote with the user's input
+//   if (voteInput != Session.get("myVote")) {
+//     console.log("user and vote exist, updating vote to " + voteInput);
+//     var dbID = Votes.findOne({user: MY_USER_ID})._id;
+//     Votes.update( {_id: dbID}, {$set: {vote: voteInput}} );
+//     Session.set("myVote", voteInput);
+//   }
+// }
+
+
+// function voteUp(){
+//   // var upID = Votes.findOne({voteType: 'up'})._id,
+//   //     downID = Votes.findOne({voteType: 'down'})._id;
+//
+//
+//   //debugging output
+//   var upVotes = Votes.findOne({voteType: "up"}).amount;
+//   var downVotes = Votes.findOne({voteType: "down"}).amount;
+//   console.log("total votes before yours was cast: Upvotes = " + upVotes
+//       + ", Downvotes = " + downVotes);
+//
+//   // If there was no previous vote, make "up"+1
+//   if (Session.get("myVote") == NOT_SET) {
+//     console.log("previous vote was NOT_SET")
+//     dbChangeVotes(upID, 1);
+//     Session.set("myVote", UP);
+//   }
+//
+//   // If previous vote was "down", make "up"+1 and "down"-1
+//   if (Session.get("myVote") == DOWN) {
+//     console.log("previous vote was DOWN")
+//     Session.set("myVote", UP);
+//     dbChangeVotes(upID, 1);
+//     dbChangeVotes(downID, -1);
+//   }
+//
+//   //debugging output
+//   upVotes = Votes.findOne({voteType: "up"}).amount
+//   downVotes = Votes.findOne({voteType: "down"}).amount
+//   console.log("total votes after yours was cast: Upvotes = " + upVotes
+//       + ", Downvotes = " + downVotes);
+// }
+
+
+// function voteDown(){
+//   var upID = Votes.findOne({voteType: 'up'})._id,
+//       downID = Votes.findOne({voteType: 'down'})._id
+//
+//   //debugging output
+//   var upVotes = Votes.findOne({voteType: "up"}).amount
+//   var downVotes = Votes.findOne({voteType: "down"}).amount
+//   console.log("total votes before yours was cast: Upvotes = " + upVotes + ", Downvotes = " + downVotes);
+//
+//   // If there was no previous vote, make "down"+1
+//   if (Session.get("myVote") == NOT_SET) {
+//     console.log("previous vote was NOT_SET")
+//     dbChangeVotes(downID, 1);
+//     Session.set("myVote", DOWN);
+//     // outputDebugging();
+//     // return
+//   }
+//
+//   // If previous vote was "up", make "down"+1 and "up"-1
+//   if (Session.get("myVote") == UP) {
+//     console.log("previous vote was UP")
+//     Session.set("myVote", DOWN);
+//     dbChangeVotes(downID, 1);
+//     dbChangeVotes(upID, -1);
+//     // outputDebugging();
+//   }
+//
+//   //debugging output
+//   upVotes = Votes.findOne({voteType: "up"}).amount
+//   downVotes = Votes.findOne({voteType: "down"}).amount
+//   console.log("total votes after yours was cast: Upvotes = " + upVotes + ", Downvotes = " + downVotes);
+// }
 
 
 function dbChangeVotes( direction, changeBy ){
