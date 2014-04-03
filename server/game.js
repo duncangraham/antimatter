@@ -3,6 +3,11 @@
 //  Global Variables
 //
 //==================================================================
+//                    Note: inside the database, the server's current
+//                    color is saved inside the 
+//                    {tag: "database is ready", color: (RED | BLUE)} 
+//                    row
+//
 // RED              = One of the two possible "colors" the server can
 //                    have. Every FLIP_INTERVAL ms, the server switches
 //                    colors from red to blue (or vice-versa) as a means
@@ -18,6 +23,7 @@
 //                    voteTally function to update their own color to
 //                    match that of the server, and thus show that they
 //                    are still keeping up with the server's activity.
+//
 // BLUE             = the other color for the server to be other than red
 //
 // SERVER_COLOR     = the current color that the server is (either RED, or
@@ -56,12 +62,14 @@ function changeColor() {
     return;
   }
 
+  //switch server color
   if (SERVER_COLOR == RED) {
     SERVER_COLOR = BLUE;
   } else {
     SERVER_COLOR = RED
   }
 
+  //remove non-responsive users
   Votes.remove({color: SERVER_COLOR});
 
   Votes.update({tag: {$exists: true}}, {$set: {color: SERVER_COLOR}});
