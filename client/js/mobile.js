@@ -109,16 +109,31 @@ Template.mobile.rendered = function() {
   }
 }
 
-//==================================================================
+//========================================================================
 //
 //  Template helper functions
 //
-//==================================================================
+//========================================================================
 Template.mobile.helpers({
   votes: function () {
     return Votes.find();
   },
 
+//------------------------------------------------------------------------
+// voteTally()
+// 
+// Acts as a watchdog to tell when the server has changed any values. In
+// all, it leverages its reactivity as a helper function to:
+// 1) Set the dbReady session variable to let other functions know when
+//    the database is loaded.
+// 2) Register the user if he or she is not already registered
+// 3) Update the client's color to match that of the server when the
+//    server switches colors (see documentation in server/game.js for info
+//    about colors)
+//
+// voteTally() also outputs the current "score" of the votes (which is
+// equal to the number of upvotes minus the number of downvotes)
+//------------------------------------------------------------------------
   voteTally: function() {
     if (Votes.findOne() !== undefined ){
       Session.set("dbReady", true);
@@ -163,12 +178,10 @@ Template.mobile.helpers({
 Template.mobile.events = {
   'click #vote-up': function(e) {
     vote(UP);
-    outputDebugging();
   },
 
   'click #vote-down': function(e) {
     vote(DOWN);
-    outputDebugging();
   }
 }
 
@@ -208,14 +221,21 @@ function initialUserRegistration(voteInput) {
   MY_USER_ID = dbID;
 }
 
+//------------------------------------------------------------------------
+// vote()
+// 
+// Registers the passed voteInput in the database as the vote for this
+// client. Will return automatically without doing anything if called when
+// the database is not ready.
+//------------------------------------------------------------------------
 function vote(voteInput) {
-  console.log("vote called");
   //Return automatically if the database isn't ready yet
   if (!Session.get("dbReady")) {
     return;
   }
 
-  //register the user and input vote if the user doesn't exist in DB
+  //register the user and input vote if the user hasn't registered in the
+  //DB yet
   if (!REGISTERED) {
     initialUserRegistration(voteInput);
     Session.set("myVote", voteInput);
@@ -234,6 +254,7 @@ function vote(voteInput) {
     return;
   }
 
+
   //If user and vote exist, update the vote with the user's input
   if (voteInput != Session.get("myVote")) {
     console.log("user and vote exist, updating vote to " + voteInput);
@@ -248,9 +269,4 @@ function vote(voteInput) {
     );
     Session.set("myVote", voteInput);
   }
-}
-
-//Debugging functions
-function outputDebugging() {
-  console.log("Your vote = " + Session.get("myVote"));
 }
