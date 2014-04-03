@@ -1,8 +1,3 @@
-// if ( Meteor.isClient ) {
-//     Votes = new Meteor.Collection("votes");
-// }
-
-
 //==================================================================
 //
 //  Global Variables
