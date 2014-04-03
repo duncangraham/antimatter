@@ -204,9 +204,9 @@ function getUserVote(userID) {
 //
 // the inserted row will have the following information:
 //
-//    _id    |   user   |   vote
-// ----------+----------+----------
-// mongo_id  | mongo_id | voteInput
+//    _id    |   user   |   vote    |     color
+// ----------+----------+-----------+---------------
+// mongo_id  | mongo_id | voteInput | RED (or BLUE)
 //
 //------------------------------------------------------------------------
 function initialUserRegistration(voteInput) {
