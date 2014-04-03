@@ -5,6 +5,21 @@
 
 //==================================================================
 //
+//  Global Variables
+//
+//==================================================================
+// UP               = used to mark whether the user has a vote of up or
+//                    down
+// DOWN             = same as with UP
+// NOT_SET          = the session variable myVote will be set to NOT_SET
+//                    at page laod to show that the user hasn't yet
+//                    submitted a vote
+UP = 1;
+DOWN = -1;
+NOT_SET = 0;
+
+//==================================================================
+//
 //  Session Variables
 //
 //==================================================================
@@ -222,10 +237,10 @@ Template.game.events = {
 //------------------------------------------------------------------------
 function getVoteScore() {
   if (Session.get("dbReady")) {
-    var upVotes = Votes.findOne({voteType: "up"}).amount;
-    var downVotes = Votes.findOne({voteType: "down"}).amount;
-    console.log("upVotes = " + upVotes);
-    console.log("downVotes = " + downVotes);
+    var upVotes = Votes.find({vote: UP}).count();
+    var downVotes = Votes.find({vote: DOWN}).count();
+    // console.log("upVotes = " + upVotes);
+    // console.log("downVotes = " + downVotes);
     return upVotes - downVotes;
   } else {
     return null;
@@ -262,6 +277,7 @@ function addPoint() {
     if (Session.get("dbReady")){
       intervalPeriod = 1000;
       graphPoints = Session.get("graphPoints");
+      console.log( "Current score = " + getVoteScore());
       graphPoints.push( getVoteScore() );
       Session.set("graphPoints", graphPoints);
       console.log(graphPoints);
