@@ -65,20 +65,27 @@ Template.mobile.rendered = function() {
   //TODO: test if tilting actually works or not now that the lock is in
   //place
   //TODO: make a voting view for people who do not have tilting supported
-  // if (window.DeviceOrientationEvent) {
-  //   console.log("Tilting is supported on this device");
-  //
-  //   // Listen for the event and handle DeviceOrientationEvent object
-  //   window.addEventListener('deviceorientation', 
-  //                           handleTilting, 
-  //                           false);
-  // }
-  // else {
-  //   console.log("Sorry, your device doesn't have tilt recognition");
-  // }
+  if (window.DeviceOrientationEvent) {
+    console.log("Tilting is supported on this device");
+
+    // Listen for the event and handle DeviceOrientationEvent object
+    window.addEventListener('deviceorientation', 
+                            handleTilting, 
+                            false);
+  }
+  else {
+    console.log("Sorry, your device doesn't have tilt recognition");
+    $("#non-tilt").show();
+    $("#tilt").hide();
+  }
 
   //for now, make the voting binary.  Only up or down
   function handleTilting(eventData){
+    console.log('handleTilting called');
+
+    $("#tilt").show();
+    $("#non-tilt").hide();
+
     if( Session.get("dbReady") !== false ){
       var b = eventData.beta,
           voteChoice = document.getElementById('voteChoice');
@@ -171,12 +178,18 @@ Template.mobile.helpers({
 //
 //==================================================================
 Template.mobile.events = {
-  'click #vote-up': function(e) {
+  'click .vote-up': function(e) {
     vote(UP);
+    $("#unaffected").animate({top: 0}, 400);
+    $("#affected").animate({top: 100 + "%"}, 400);
+    //bring down 'you voted up' screen
   },
 
-  'click #vote-down': function(e) {
+  'click .vote-down': function(e) {
     vote(DOWN);
+    $("#affected").animate({top: 0}, 400);
+    $("#unaffected").animate({top: -100 + "%"}, 400);
+    //bring up 'you voted down' screen
   }
 }
 
@@ -205,7 +218,6 @@ function getUserVote(userID) {
 //
 //------------------------------------------------------------------------
 function initialUserRegistration(voteInput) {
-  console.log("initialUserRegistration called");
   dbID = Votes.insert({
     user: undefined, 
     vote: voteInput, 
