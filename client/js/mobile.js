@@ -178,18 +178,18 @@ Template.mobile.helpers({
 //
 //==================================================================
 Template.mobile.events = {
+  //bring down 'you voted up' screen and slide down the other one further
   'click .vote-up': function(e) {
     vote(UP);
     $("#unaffected").animate({top: 0}, 400);
-    $("#affected").animate({top: 100 + "%"}, 400);
-    //bring down 'you voted up' screen
+    $("#affected").animate({top: 200 + "%"}, 400);
   },
 
+  //bring up 'you voted down' screen and slide up the other one further
   'click .vote-down': function(e) {
     vote(DOWN);
     $("#affected").animate({top: 0}, 400);
-    $("#unaffected").animate({top: -100 + "%"}, 400);
-    //bring up 'you voted down' screen
+    $("#unaffected").animate({top: -200 + "%"}, 400);
   }
 }
 
