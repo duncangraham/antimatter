@@ -5,6 +5,24 @@
   top: -100%;
 }
 
+#unaffected {
+  top: -100%;
+}
+
+#affected {
+  top: 100%;
+}
+
+.tall {
+  height: 80%;
+  width: 100%;
+}
+
+.short {
+  height: 20%;
+  width: 100%;
+}
+
 .orientation {
   border: 1px white solid;
   height: 30px;

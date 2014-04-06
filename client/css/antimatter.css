@@ -32,6 +32,10 @@ a {
 
 /* Widths and margins */
 
+.pos-a {
+  position: absolute;
+}
+
 .p1 {
 	padding:1em;
 }
@@ -80,12 +84,28 @@ a {
 	height: 100%;
 }
 
+.h80 {
+	height: 80%;
+}
+
+.h75 {
+	height: 75%;
+}
+
 .h50 {
 	height: 50%;
 }
 
 .h33 {
 	height: 33.33%;
+}
+
+.h25{
+	height: 25%;
+}
+
+.h20 {
+	height: 20%;
 }
 
 .h10 {
@@ -116,6 +136,10 @@ a {
 	width: 15%;
 }
 
+.w3 {
+	width: 3%;
+}
+
 .m50 {
 	margin-left: 50% 
 }
@@ -138,6 +162,11 @@ a {
 
 .center {
 	margin: 0px auto;
+}
+
+.vert-center {
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .uppercase {
@@ -498,6 +527,10 @@ video.bgvid#matterVid {
 
 .ztop {
 	z-index: 1000;
+}
+
+.disp-table {
+  display: table;
 }
 
 .showSvg svg {
