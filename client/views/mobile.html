@@ -88,17 +88,17 @@
 <template name="unaffected">
   <div id="unaffected" 
        class="h100 w100 pos-a text-center tk-open-sans uppercase
-              text-small thin z1">
+              z1">
 
     <div class="tall dark disp-table">
-      <div id="unaffected-text" class="vert-center">
+      <div id="unaffected-text" class="vert-center bold">
         <p> You voted that it's unaffected by gravity </p>
         <img src="up-light.svg" alt="" class="w15 center" />
       </div>
     </div>
 
     <div class="short light disp-table">
-      <div id="change-vote-to-affected" class="vert-center">
+      <div id="change-vote-to-affected" class="vert-center vote-down">
         <img src="down-light.svg" alt="" class="w3 center" />
         <p> Click to vote the other way </p>
       </div>
@@ -130,57 +130,26 @@
 </template>
 
 
+<template name="affected">
+<div id="affected" 
+       class="h100 w100 pos-a text-center tk-open-sans uppercase
+              z1">
+
+  <div class="short light disp-table">
+    <div id="change-vote-to-unaffected" class="vert-center vote-up 
+      text-small thin">
+      <p> Click to vote the other way </p>
+      <img src="up-light.svg" alt="" class="w3 center" />
+    </div>
   </div>
 
-  <button id="vote-up">Vote Up</button>
-  <button id="vote-down">Vote Down</button>
+  <div class="tall dark disp-table">
+    <div id="affected-text" class="vert-center bold">
+      <img src="down-light.svg" alt="" class="w15 center" />
+      <p> You voted that it's affected by gravity </p>
+    </div>
+  </div>
+
+</div>
 </template>
 
-<!--  <template name="mobile"> -->
-<!--   <div class="overflow&#45;hidden h100 w100"> -->
-<!--     <div class="instructions text&#45;center h100 w100 light bold"> -->
-<!--  -->
-<!--  -->
-<!--       <div class="tk&#45;open&#45;sans uppercase text&#45;mini thin p1"> -->
-<!--         unaffected by gravity -->
-<!--         <p class="text&#45;small">(tilt towards you)</p> -->
-<!--       </div> -->
-<!--       <img src="up&#45;light.svg" alt="" class="w15 center" /> -->
-<!--  -->
-<!--       <p class="tk&#45;open&#45;sans uppercase p1">Tilt your device to vote how the particle is affected</p> -->
-<!--  -->
-<!--  -->
-<!--       <img src="down&#45;light.svg" alt="" class="w15 center" /> -->
-<!--       <div class="tk&#45;open&#45;sans uppercase text&#45;mini thin p1"> -->
-<!--         affected by gravity -->
-<!--         <p class="text&#45;small">(tilt away from you)</p> -->
-<!--       </div> -->
-<!--         <div class="orientation top&#45;left z&#45;top" style="top:0; left:0"> -->
-<!--         </div> -->
-<!--          <div class="beta"> -->
-<!--         </div> -->
-<!--  -->
-<!--     </div> -->
-<!--  -->
-<!--   <div id="voteChoice" class="votes w100"> -->
-<!--  -->
-<!--  -->
-<!--     <div class="w100 h33 dark mb170 text&#45;center bold text&#45;large relative"> -->
-<!--       <div class="tk&#45;open&#45;sans uppercase w100" style="position: absolute; top: 33%;"> -->
-<!--         <img src="up&#45;light.svg" alt="" class="w25 center pb1"> -->
-<!--         <p>unaffected</p> -->
-<!--         <p class="text&#45;small">by gravity</p> -->
-<!--       </div> -->
-<!--     </div> -->
-<!--  -->
-<!--     <div class="w100 h33 dark text&#45;center text&#45;large pb25 relative"> -->
-<!--       <div class="tk&#45;open&#45;sans uppercase text&#45;center bold w100" style="position: absolute; bottom: 33%;"> -->
-<!--         affected  -->
-<!--         <p class="text&#45;small">by gravity</p> -->
-<!--         <img src="down&#45;light.svg" alt="" class="w25 center pt1"> -->
-<!--       </div> -->
-<!--     </div> -->
-<!--   </div> -->
-<!-- </div> -->
-<!-- <div class="tally invisible"> The current score is: {{voteTally}} </div> -->
-<!-- </template> -->

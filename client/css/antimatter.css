@@ -15,6 +15,11 @@ body {
 /*	overflow: hidden;*/
 }
 
+/* p { */
+/*   margin-top: 1%; */
+/*   margin-bottom: 1%; */
+/* } */
+
 .dark {
 	color: #FFF;
 	background-color: #14081B;
