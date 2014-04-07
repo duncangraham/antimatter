@@ -81,8 +81,6 @@ Template.mobile.rendered = function() {
 
   //for now, make the voting binary.  Only up or down
   function handleTilting(eventData){
-    console.log('handleTilting called');
-
     $("#tilt").show();
     $("#non-tilt").hide();
 
