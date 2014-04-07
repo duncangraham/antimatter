@@ -19,17 +19,13 @@
 <!-- </template> -->
 
 <template name="mobile">
-  <div class="overflow-hidden h100 w100">
+  <div id="static-viewport">
 
     <!-- <div id="non&#45;tilt" class="invisible"> -->
     <div id="non-tilt">
-
       {{> unaffected}}
-
       {{> nonTiltInstructions}}
-
       {{> affected}}
-
     </div> <!-- END #non-tilt -->
 
 
@@ -108,7 +104,7 @@
 
 
 <template name="nonTiltInstructions">
-  <div class="text-center h100 w100 pos-a light bold">
+  <div id="js-main-page" class="text-center h100 w100 pos-a light bold">
     <div class="vote-up">
       <div class="tk-open-sans uppercase text-small thin p1">
         unaffected by gravity

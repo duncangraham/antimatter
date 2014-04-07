@@ -181,15 +181,17 @@ Template.mobile.events = {
   //bring down 'you voted up' screen and slide down the other one further
   'click .vote-up': function(e) {
     vote(UP);
-    $("#unaffected").animate({top: 0}, 400);
-    $("#affected").animate({top: 200 + "%"}, 400);
+    $("#unaffected").css('top', 0);
+    $("#js-main-page").css("top", 100 + "%");
+    $("#affected").css("top", 200 + "%");
   },
 
   //bring up 'you voted down' screen and slide up the other one further
   'click .vote-down': function(e) {
     vote(DOWN);
-    $("#affected").animate({top: 0}, 400);
-    $("#unaffected").animate({top: -200 + "%"}, 400);
+    $("#unaffected").css('top', "-200%");
+    $("#js-main-page").css("top", "-100%");
+    $("#affected").css("top", 0);
   }
 }
 
