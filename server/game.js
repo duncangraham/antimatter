@@ -30,8 +30,7 @@
 //                    BLUE)
 // FLIP_INTERVAL    = The number of milliseconds the server will wait
 //                    before flipping colors (from RED to BLUE, or
-//                    vice-versa). 2000 ms works pretty well without there
-//                    being problems.  Smaller values will make sure that
+//                    vice-versa). Smaller values will make sure that
 //                    inactive users are kicked out promptly, but also
 //                    increases the chance of active users getting kicked
 //                    out as well (since they have less time to update
@@ -46,7 +45,7 @@
 RED = 1;
 BLUE = 0;
 SERVER_COLOR = RED;
-FLIP_INTERVAL = 2000;
+FLIP_INTERVAL = 10000;
 FIRST_RUN = true;
 
 //==================================================================
